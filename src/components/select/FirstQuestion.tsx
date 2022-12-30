@@ -1,10 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
-
-interface IProps {
-  setNextValid: Dispatch<SetStateAction<boolean>>;
-}
-
-const FirstQuestion = (props: IProps) => {
+const FirstQuestion = (props: SetStateProps<boolean>) => {
   const { setNextValid } = props;
 
   return <div>첫번째 질문페이지</div>;
