@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 
 interface Props {
-  keyword: string;
+  keyword?: string;
   text: string;
 }
 
@@ -22,6 +22,7 @@ const StHeadline = styled.div`
 
 const StText = styled.p`
   font-size: 20px;
+  text-align: center;
 `;
 
 const StKeyword = styled.span`
