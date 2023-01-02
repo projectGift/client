@@ -4,9 +4,14 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import SEO from '@src/components/common/SEO';
 import BackIcon from '../../public/assets/icons/icons_back.png';
-import FirstQuestion from '@src/components/select/FirstQuestion';
-import SecondQuestion from '@src/components/select/SecondQuestion';
-import ThirdQuestion from '@src/components/select/ThirdQuestion';
+import ReceiverInfo from '@src/components/select/ReceiverInfo';
+import GenderInfo from '@src/components/select/GenderInfo';
+import AgeInfo from '@src/components/select/AgeInfo';
+import MbtiInfo from '@src/components/select/MbtiInfo';
+import PersonalityInfo from '@src/components/select/PersonalityInfo';
+import PriceInfo from '@src/components/select/PriceInfo';
+import Onboarding from '@src/components/select/Onboarding';
+import DetailInfo from '@src/components/select/DetailInfo';
 
 const Select = () => {
   const router = useRouter();
@@ -14,9 +19,14 @@ const Select = () => {
   const [nextValid, setNextValid] = useState<boolean>(false);
 
   const pages = [
-    <FirstQuestion key={0} setNextValid={setNextValid} />,
-    <SecondQuestion key={1} setNextValid={setNextValid} />,
-    <ThirdQuestion key={2} setNextValid={setNextValid} />,
+    <ReceiverInfo key={0} setNextValid={setNextValid} />,
+    <GenderInfo key={1} setNextValid={setNextValid} />,
+    <AgeInfo key={2} setNextValid={setNextValid} />,
+    <MbtiInfo key={3} setNextValid={setNextValid} />,
+    <PersonalityInfo key={4} setNextValid={setNextValid} />,
+    <PriceInfo key={5} setNextValid={setNextValid} />,
+    <Onboarding key={6} setNextValid={setNextValid} />,
+    <DetailInfo key={7} setNextValid={setNextValid} />,
   ];
 
   const handleClickPrev = () => {
@@ -95,13 +105,15 @@ const StFlexBox = styled.div`
 
 const StContents = styled.div`
   position: absolute;
-  top: 45%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding: 0 20px;
   width: 100%;
-  height: 70vh;
-  overflow: auto;
   border: 1px solid black;
 `;
 
