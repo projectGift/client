@@ -12,21 +12,23 @@ import PersonalityInfo from '@src/components/select/PersonalityInfo';
 import PriceInfo from '@src/components/select/PriceInfo';
 import Onboarding from '@src/components/select/Onboarding';
 import DetailInfo from '@src/components/select/DetailInfo';
+import Next from '@src/components/common/Next';
+import { pageIdxState } from '@src/state/pageIdx';
+import { useRecoilState } from 'recoil';
 
 const Select = () => {
   const router = useRouter();
-  const [pageIdx, setPageIdx] = useState<number>(0);
-  const [nextValid, setNextValid] = useState<boolean>(false);
+  const [pageIdx, setPageIdx] = useRecoilState(pageIdxState);
 
   const pages = [
-    <ReceiverInfo key={0} setNextValid={setNextValid} />,
-    <GenderInfo key={1} setNextValid={setNextValid} />,
-    <AgeInfo key={2} setNextValid={setNextValid} />,
-    <MbtiInfo key={3} setNextValid={setNextValid} />,
-    <PersonalityInfo key={4} setNextValid={setNextValid} />,
-    <PriceInfo key={5} setNextValid={setNextValid} />,
-    <Onboarding key={6} setNextValid={setNextValid} />,
-    <DetailInfo key={7} setNextValid={setNextValid} />,
+    <ReceiverInfo key={0} />,
+    <GenderInfo key={1} />,
+    <AgeInfo key={2} />,
+    <MbtiInfo key={3} />,
+    <PersonalityInfo key={4} />,
+    <PriceInfo key={5} />,
+    <Onboarding key={6} />,
+    <DetailInfo key={7} />,
   ];
 
   const handleClickPrev = () => {
@@ -61,7 +63,7 @@ const Select = () => {
         <StContents>{pages[pageIdx]}</StContents>
         <StFooter>
           {pageIdx + 1 !== pages.length ? (
-            <StNextBtn onClick={handleClickNext}>다음</StNextBtn>
+            <Next handleClickNext={handleClickNext} />
           ) : (
             <StNextBtn onClick={handleClickSubmit}>제출</StNextBtn>
           )}

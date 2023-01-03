@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { nextValidState } from '@src/state/nextValid';
+import { useRecoilValue } from 'recoil';
 
 interface Props {
   handleClickNext: () => void;
 }
 
 const Next = ({ handleClickNext }: Props) => {
+  const nextValid = useRecoilValue(nextValidState);
   return (
-    <StNext nextValid={true} disabled={false} onClick={handleClickNext}>
+    <StNext nextValid={nextValid} disabled={!nextValid} onClick={handleClickNext}>
       다음
     </StNext>
   );

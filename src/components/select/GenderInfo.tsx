@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
 import Headline from '../common/Headline';
 
-const GenderInfo = (props: SetStateProps<boolean>) => {
-  const { setNextValid } = props;
-
+const GenderInfo = () => {
   return (
     <StGenderInfo>
       <StHeader>

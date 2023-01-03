@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
+import { receiverState } from '@src/state/receiver';
+import { useRecoilState } from 'recoil';
 import Headline from '../common/Headline';
 
-const ReceiverInfo = (props: SetStateProps<boolean>) => {
-  const { setNextValid } = props;
+const ReceiverInfo = () => {
+  const [receiver, setReceiver] = useRecoilState(receiverState);
 
   return (
     <StRecieverInfo>
