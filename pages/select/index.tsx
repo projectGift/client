@@ -50,15 +50,13 @@ const Select = () => {
       <SEO title="질문 선택" />
       <StSelect>
         <StHeader>
-          <StProgressWrapper>
-            <StProgress width={((pageIdx + 1) / pages.length) * 100 + '%'} />
-          </StProgressWrapper>
           <StFlexBox>
             <Image src={BackIcon} alt="back" width={12} height={20} onClick={handleClickPrev} />
-            <p>
-              {pageIdx + 1} / {pages.length}
-            </p>
           </StFlexBox>
+          <StProgressWrapper>
+            <StAheadProgress width={((pageIdx + 1) / pages.length) * 100 + '%'} />
+            <StProgress width={(pageIdx / pages.length) * 100 + '%'} />
+          </StProgressWrapper>
         </StHeader>
         <StContents>{pages[pageIdx]}</StContents>
         <StFooter>
@@ -80,19 +78,34 @@ const StSelect = styled.div`
 `;
 
 const StHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 `;
 
 const StProgressWrapper = styled.div`
+  margin-right: 30px;
+  position: relative;
   width: 100%;
-  background: lightgray;
+  height: 3px;
+  background: #f0f0f0;
 `;
 
-const StProgress = styled.div<{ width: string }>`
+const StAheadProgress = styled.div<{ width: string }>`
+  position: absolute;
+  top: 0;
   width: ${(props) => props.width};
-  height: 5px;
-  background: red;
-  transition: width 1s;
+  height: 3px;
+  background: #9bbed2;
+`;
+const StProgress = styled.div<{ width: string }>`
+  position: absolute;
+  top: 0;
+  width: ${(props) => props.width};
+  height: 3px;
+  background: #456f87;
+  transition: width 0.5s;
 `;
 
 const StFlexBox = styled.div`
@@ -100,7 +113,7 @@ const StFlexBox = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  width: 100%;
+  width: 15%;
 `;
 
 const StContents = styled.div`
