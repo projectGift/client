@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
 import Headline from '../common/Headline';
 
-const PriceInfo = (props: SetStateProps<boolean>) => {
-  const { setNextValid } = props;
-
+const PriceInfo = () => {
   return (
     <StPriceInfo>
       <StHeader>

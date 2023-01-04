@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
 import Headline from '../common/Headline';
 
-const Onboarding = (props: SetStateProps<boolean>) => {
-  const { setNextValid } = props;
-
+const Onboarding = () => {
   return (
     <StOnboarding>
       <StHeader>

@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
 import Headline from '../common/Headline';
 
-const MbtiInfo = (props: SetStateProps<boolean>) => {
-  const { setNextValid } = props;
-
+const MbtiInfo = () => {
   return (
     <StMbtiInfo>
       <StHeader>
