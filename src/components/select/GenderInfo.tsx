@@ -5,7 +5,7 @@ const GenderInfo = () => {
   return (
     <StGenderInfo>
       <StHeader>
-        <Headline text="상대방의 성별을 알려주세요." />
+        <Headline text="상대방의 /성별/을 알려주세요." />
       </StHeader>
     </StGenderInfo>
   );

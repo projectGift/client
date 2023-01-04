@@ -5,7 +5,7 @@ const PersonalityInfo = () => {
   return (
     <StPersinalityInfo>
       <StHeader>
-        <Headline text="그럼 평소의 성격은 어떤가요?" />
+        <Headline text="그럼 /평소의 성격/은 어떤가요?" />
       </StHeader>
     </StPersinalityInfo>
   );

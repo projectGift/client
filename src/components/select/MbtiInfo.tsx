@@ -5,7 +5,7 @@ const MbtiInfo = () => {
   return (
     <StMbtiInfo>
       <StHeader>
-        <Headline text="상대방의 MBTI를 알고 있나요?" />
+        <Headline text="상대방의 /MBTI/를 알고 있나요?" />
       </StHeader>
     </StMbtiInfo>
   );
