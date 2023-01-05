@@ -20,16 +20,16 @@ export const nextValidState = selector({
     const price = get(priceState);
 
     switch (pageIdx) {
-      case 0:
-        return receiver > 0;
-      case 1:
-        return gender > 0;
-      case 2:
-        return age > 0;
-      case 3:
-        return mbti > 0;
-      case 4:
-        return personality > 0;
+      // case 0:
+      //   return receiver > 0;
+      // case 1:
+      //   return gender > 0;
+      // case 2:
+      //   return age > 0;
+      // case 3:
+      //   return mbti > 0;
+      // case 4:
+      //   return personality > 0;
       default:
         return true;
     }
