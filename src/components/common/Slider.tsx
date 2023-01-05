@@ -26,7 +26,7 @@ const Slider = ({ options, state, setState }: SliderProp) => {
           const { key, option } = el;
           const currentDiff: number = Math.abs(key - state) <= 2 ? Math.abs(key - state) : 2;
           return (
-            <StOption selected={state === key} key={key} onClick={() => handleScroll(key)} currentOption={currentDiff}>
+            <StOption selected={state === key} key={key} onClick={() => handleScroll(key)} currentDiff={currentDiff}>
               {option}
             </StOption>
           );
@@ -51,7 +51,7 @@ const StWrapper = styled.div`
   flex-direction: column;
 `;
 
-const StOption = styled.button<{ selected: boolean; currentOption: number }>`
+const StOption = styled.button<{ selected: boolean; currentDiff: number }>`
   padding: 5px 10px;
   margin: 10px;
   width: 100px;
@@ -65,8 +65,8 @@ const StOption = styled.button<{ selected: boolean; currentOption: number }>`
   scroll-snap-align: center;
   scroll-behavior: smooth;
   transition: all 0.2s;
-  opacity: ${({ currentOption }) => 0.9 / currentOption};
-  scale: ${({ currentOption }) => (currentOption === 2 ? 0.8 : currentOption === 1 ? 0.9 : 1)};
+  opacity: ${({ currentDiff }) => 0.9 / currentDiff};
+  scale: ${({ currentDiff }) => (currentDiff === 2 ? 0.8 : currentDiff === 1 ? 0.9 : 1)};
 `;
 
 export default Slider;
