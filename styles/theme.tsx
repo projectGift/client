@@ -1,16 +1,24 @@
 import { Theme } from '@emotion/react';
 
 const color = {
-  primary: '#FFC600',
-  'primary-light': '#fdf4da',
-  'primary-dark': '#b39e00',
+  mainBlue: '#456f87',
+  subBlue: '#9bbed2',
+  accentOrange: '#e9834a',
+  lightGray: '#f0f0f0',
+  gray: '#dcdcdc',
+  blackFont: '#222222',
+  grayFont: '#9e9e9e',
 };
 
 const theme: Theme = {
   color: {
-    primary: color.primary,
-    'primary-light': color['primary-light'],
-    'primary-dark': color['primary-dark'],
+    mainBlue: color.mainBlue,
+    subBlue: color.subBlue,
+    accentOrange: color.accentOrange,
+    lightGray: color.lightGray,
+    gray: color.gray,
+    blackFont: color.blackFont,
+    grayFont: color.grayFont,
   },
 };
 
