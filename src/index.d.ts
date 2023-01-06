@@ -11,3 +11,13 @@ interface SliderProp {
   state: number;
   setState: SetterOrUpdater<number>;
 }
+
+interface Color {
+  mainBlue: string;
+  subBlue: string;
+  accentOrange: string;
+  lightGray: string;
+  gray: string;
+  blackFont: string;
+  grayFont: string;
+}

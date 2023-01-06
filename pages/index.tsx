@@ -10,7 +10,7 @@ const Home = () => {
     <>
       <SEO title="@@" />
       <StHome>
-        <StHeader>로고</StHeader>
+        {/* <StHeader>로고</StHeader> */}
         <StFooter>
           <StWithoutLoginBtn
             onClick={() => {
@@ -18,11 +18,11 @@ const Home = () => {
             }}>
             로그인 없이 이용하기
           </StWithoutLoginBtn>
-          <StLoginBox>
+          {/* <StLoginBox>
             {SOCIAL_LOGIN_TYPE.map(({ id, type }) => (
               <StLoginBtn key={id}>{type}</StLoginBtn>
             ))}
-          </StLoginBox>
+          </StLoginBox> */}
         </StFooter>
       </StHome>
     </>
@@ -39,6 +39,7 @@ const StHome = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
+  background-color: ${({ theme }) => theme.color.mainBlue};
 `;
 
 const StHeader = styled.h1`
@@ -65,6 +66,12 @@ const StFooter = styled.div`
 const StWithoutLoginBtn = styled.button`
   width: 100%;
   height: 50px;
+  border-radius: 50px;
+  border: none;
+  background-color: white;
+  color: ${({ theme }) => theme.color.mainBlue};
+  font-family: '에스코어드림Bold';
+  font-size: 16px;
 `;
 
 const StLoginBox = styled.div`
