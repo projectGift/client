@@ -1,3 +1,5 @@
+import { Theme } from '@emotion/react';
+
 const color = {
   mainBlue: '#456f87',
   subBlue: '#9bbed2',
@@ -7,18 +9,6 @@ const color = {
   blackFont: '#222222',
   grayFont: '#9e9e9e',
 };
-
-interface Theme {
-  color: {
-    mainBlue: string;
-    subBlue: string;
-    accentOrange: string;
-    lightGray: string;
-    gray: string;
-    blackFont: string;
-    grayFont: string;
-  };
-}
 
 const theme: Theme = {
   color: {
