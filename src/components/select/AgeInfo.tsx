@@ -5,7 +5,7 @@ const AgeInfo = () => {
   return (
     <StAgeInfo>
       <StHeader>
-        <Headline text="상대방의 나이는 어떻게 되나요?" />
+        <Headline text="상대방의 /나이/는 어떻게 되나요?" />
       </StHeader>
     </StAgeInfo>
   );

@@ -9,7 +9,7 @@ const ReceiverInfo = () => {
   return (
     <StRecieverInfo>
       <StHeader>
-        <Headline text="누구에게 줄 선물인가요?" />
+        <Headline text="/누구/에게 줄 선물인가요?" />
       </StHeader>
     </StRecieverInfo>
   );
