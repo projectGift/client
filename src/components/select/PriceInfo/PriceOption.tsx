@@ -12,8 +12,8 @@ const PriceOption = ({ setPercent }: IProps) => {
   const [price, setPrice] = useRecoilState(priceState);
   const [selected, setSelected] = useState<string>('');
 
-  const buttonHandler = (text: string) => {
-    switch (text) {
+  const buttonHandler = (option: string) => {
+    switch (option) {
       case '소소하게':
         return setPrice({ start: 0, end: 100000 }), setPercent({ left: 0, right: 66.6 });
       case '적당하게':
@@ -25,14 +25,14 @@ const PriceOption = ({ setPercent }: IProps) => {
 
   return (
     <StPriceOption>
-      {OPTION.map(({ id, text }) => (
+      {OPTION.map(({ key, option }) => (
         <Option
-          key={id}
-          text={text}
-          selected={text === selected}
+          key={key}
+          text={option}
+          selected={option === selected}
           onClick={() => {
-            setSelected(text);
-            buttonHandler(text);
+            setSelected(option);
+            buttonHandler(option);
           }}
         />
       ))}
@@ -40,10 +40,10 @@ const PriceOption = ({ setPercent }: IProps) => {
   );
 };
 
-const OPTION = [
-  { id: 0, text: '소소하게' },
-  { id: 1, text: '적당하게' },
-  { id: 2, text: '넉넉하게' },
+const OPTION: IOption[] = [
+  { key: 0, option: '소소하게' },
+  { key: 1, option: '적당하게' },
+  { key: 2, option: '넉넉하게' },
 ];
 
 const StPriceOption = styled.div`
