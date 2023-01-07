@@ -26,6 +26,7 @@ const StNext = styled.button<{ nextValid: boolean }>`
   font-size: 16px;
   border-radius: 50px;
   border: none;
+  transition: all 0.2s;
 `;
 
 export default Next;
