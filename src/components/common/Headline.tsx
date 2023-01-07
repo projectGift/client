@@ -26,12 +26,13 @@ const StHeadline = styled.div`
 
 const StText = styled.span`
   font-size: 20px;
+  font-family: '에스코어드림Regular';
 `;
 
 const StKeyword = styled.span`
-  color: #456f87;
+  color: ${({ theme }) => theme.color.mainBlue};
   font-size: 20px;
-  font-weight: 600;
+  font-family: '에스코어드림Bold';
 `;
 
 export default Headline;

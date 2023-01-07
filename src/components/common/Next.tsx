@@ -20,9 +20,9 @@ const StNext = styled.button<{ nextValid: boolean }>`
   padding: 5px 10px;
   width: 80%;
   height: 50px;
-  background-color: ${({ nextValid }) => (nextValid ? '#456F87' : '#f0f0f0')};
-  color: ${({ nextValid }) => (nextValid ? 'white' : 'black')};
-  font-weight: 400;
+  background-color: ${({ theme, nextValid }) => (nextValid ? theme.color.mainBlue : theme.color.lightGray)};
+  color: ${({ theme, nextValid }) => (nextValid ? 'white' : theme.color.grayFont)};
+  font-family: '에스코어드림Regular';
   font-size: 16px;
   border-radius: 50px;
   border: none;
