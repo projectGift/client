@@ -4,14 +4,15 @@ import { nextValidState } from '@src/state/nextValid';
 import { useRecoilValue } from 'recoil';
 
 interface Props {
-  handleClickNext: () => void;
+  onClick: () => void;
+  isLastPage: boolean;
 }
 
-const Next = ({ handleClickNext }: Props) => {
+const Next = ({ onClick, isLastPage }: Props) => {
   const nextValid = useRecoilValue(nextValidState);
   return (
-    <StNext nextValid={nextValid} disabled={!nextValid} onClick={handleClickNext}>
-      다음
+    <StNext nextValid={nextValid} disabled={!nextValid} onClick={onClick}>
+      {isLastPage ? '제출' : '다음'}
     </StNext>
   );
 };

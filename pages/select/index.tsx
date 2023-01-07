@@ -12,6 +12,7 @@ import PersonalityInfo from '@src/components/select/PersonalityInfo';
 import PriceInfo from '@src/components/select/PriceInfo';
 import Onboarding from '@src/components/select/Onboarding';
 import DetailInfo from '@src/components/select/DetailInfo';
+import TimeInfo from '@src/components/select/TimeInfo';
 import Next from '@src/components/common/Next';
 import { pageIdxState } from '@src/state/pageIdx';
 import { useRecoilState } from 'recoil';
@@ -29,6 +30,7 @@ const Select = () => {
     <PriceInfo key={5} />,
     <Onboarding key={6} />,
     <DetailInfo key={7} />,
+    <TimeInfo key={8} />,
   ];
 
   const handleClickPrev = () => {
@@ -62,11 +64,10 @@ const Select = () => {
         </StHeader>
         <StContents>{pages[pageIdx]}</StContents>
         <StFooter>
-          {pageIdx + 1 !== pages.length ? (
-            <Next handleClickNext={handleClickNext} />
-          ) : (
-            <StNextBtn onClick={handleClickSubmit}>제출</StNextBtn>
-          )}
+          <Next
+            onClick={pageIdx + 1 !== pages.length ? handleClickNext : handleClickSubmit}
+            isLastPage={pageIdx + 1 === pages.length}
+          />
         </StFooter>
       </StSelect>
     </>
