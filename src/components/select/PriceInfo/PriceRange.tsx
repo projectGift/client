@@ -44,7 +44,7 @@ const PriceRange = ({ percent, setPercent }: IProps) => {
           type="range"
           min={0}
           max={300000}
-          step="10000"
+          step="1000"
           value={start}
           onChange={(e) => {
             priceHandler(e);

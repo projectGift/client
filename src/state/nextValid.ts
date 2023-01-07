@@ -28,8 +28,8 @@ export const nextValidState = selector({
         return age > 0;
       case 3:
         return mbti > 0;
-      // case 4:
-      //   return personality > 0;
+      case 4:
+        return personality > 0;
       default:
         return true;
     }
