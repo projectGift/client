@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from '@emotion/styled';
@@ -9,7 +8,7 @@ import GenderInfo from '@src/components/select/GenderInfo';
 import AgeInfo from '@src/components/select/AgeInfo';
 import MbtiInfo from '@src/components/select/MbtiInfo';
 import PersonalityInfo from '@src/components/select/PersonalityInfo';
-import PriceInfo from '@src/components/select/PriceInfo';
+import PriceInfo from '@src/components/select/PriceInfo/PriceInfo';
 import Onboarding from '@src/components/select/Onboarding';
 import DetailInfo from '@src/components/select/DetailInfo';
 import TimeInfo from '@src/components/select/TimeInfo';

@@ -3,7 +3,7 @@ import { atom } from 'recoil';
 export const priceState = atom<Iprice>({
   key: 'priceState',
   default: {
-    start: 50000,
-    end: 100000,
+    start: 0,
+    end: 300000,
   },
 });
