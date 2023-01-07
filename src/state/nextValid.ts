@@ -26,8 +26,8 @@ export const nextValidState = selector({
         return gender > 0;
       case 2:
         return age > 0;
-      // case 3:
-      //   return mbti > 0;
+      case 3:
+        return mbti > 0;
       // case 4:
       //   return personality > 0;
       default:
