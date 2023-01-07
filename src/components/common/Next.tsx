@@ -6,18 +6,25 @@ import { useRecoilValue } from 'recoil';
 interface Props {
   onClick: () => void;
   isLastPage: boolean;
+  isOnboarding: boolean;
 }
 
-const Next = ({ onClick, isLastPage }: Props) => {
+const Next = ({ onClick, isLastPage, isOnboarding }: Props) => {
   const nextValid = useRecoilValue(nextValidState);
   return (
-    <StNext nextValid={nextValid} disabled={!nextValid} onClick={onClick}>
-      {isLastPage ? '제출' : '다음'}
-    </StNext>
+    <>
+      {isOnboarding ? (
+        <StOnboardingNext onClick={onClick}>다음</StOnboardingNext>
+      ) : (
+        <StNext nextValid={nextValid} disabled={!nextValid} onClick={onClick}>
+          {isLastPage ? '제출' : '다음'}
+        </StNext>
+      )}
+    </>
   );
 };
 
-const StNext = styled.button<{ nextValid: boolean }>`
+const StNext = styled.button<{ nextValid?: boolean }>`
   padding: 5px 10px;
   width: 80%;
   height: 50px;
@@ -28,6 +35,11 @@ const StNext = styled.button<{ nextValid: boolean }>`
   border-radius: 50px;
   border: none;
   transition: all 0.1s;
+`;
+
+const StOnboardingNext = styled(StNext)`
+  background-color: white;
+  color: ${({ theme }) => theme.color.mainBlue};
 `;
 
 export default Next;
