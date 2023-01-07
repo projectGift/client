@@ -10,7 +10,7 @@ import MbtiInfo from '@src/components/select/MbtiInfo';
 import PersonalityInfo from '@src/components/select/PersonalityInfo';
 import PriceInfo from '@src/components/select/PriceInfo/PriceInfo';
 import Onboarding from '@src/components/select/Onboarding';
-import DetailInfo from '@src/components/select/DetailInfo';
+import RelationInfo from '@src/components/select/RelationInfo/RelationInfo';
 import TimeInfo from '@src/components/select/TimeInfo';
 import Next from '@src/components/common/Next';
 import { pageIdxState } from '@src/state/pageIdx';
@@ -28,7 +28,7 @@ const Select = () => {
     <PersonalityInfo key={4} />,
     <PriceInfo key={5} />,
     <Onboarding key={6} />,
-    <DetailInfo key={7} />,
+    <RelationInfo key={7} />,
     <TimeInfo key={8} />,
   ];
 
@@ -101,6 +101,7 @@ const StAheadProgress = styled.div<{ width: string }>`
   height: 3px;
   background: #9bbed2;
 `;
+
 const StProgress = styled.div<{ width: string }>`
   position: absolute;
   top: 0;

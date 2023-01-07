@@ -17,6 +17,7 @@ export const nextValidState = selector({
     const age = get(ageState);
     const mbti = get(mbtiState);
     const personality = get(personalityState);
+    const relation = get(relationState);
     const price = get(priceState);
 
     switch (pageIdx) {
@@ -30,6 +31,8 @@ export const nextValidState = selector({
         return mbti > 0;
       case 4:
         return personality > 0;
+      case 7:
+        return relation > 0;
       default:
         return true;
     }
