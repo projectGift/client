@@ -5,7 +5,6 @@ import Headline from '../common/Headline';
 
 const ReceiverInfo = () => {
   const [receiver, setReceiver] = useRecoilState(receiverState);
-  console.log(receiver);
 
   return (
     <StRecieverInfo>
@@ -14,7 +13,7 @@ const ReceiverInfo = () => {
       </StHeader>
       <StBody>
         {RECEIVER_INFO.map((who) => (
-          <StBtnWrap>
+          <StBtnWrap key={who.key}>
             <StBtn selected={receiver === who.key} onClick={() => setReceiver(who.key)} />
             <StLabel>{who.option}</StLabel>
           </StBtnWrap>

@@ -22,8 +22,8 @@ export const nextValidState = selector({
     switch (pageIdx) {
       case 0:
         return receiver > 0;
-      // case 1:
-      //   return gender > 0;
+      case 1:
+        return gender > 0;
       // case 2:
       //   return age > 0;
       // case 3:
