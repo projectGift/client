@@ -10,8 +10,8 @@ const AgeInfo = () => {
     <StAgeInfo>
       <StHeader>
         <Headline text="상대방의 /나이/는 어떻게 되나요?" />
-        <Slider options={AGE_INFO} state={age} setState={setAge} />
       </StHeader>
+      <Slider options={AGE_INFO} state={age} setState={setAge} />
     </StAgeInfo>
   );
 };

@@ -25,6 +25,7 @@ const StOption = styled.button<{ selected: boolean }>`
   font-size: 16px;
   border-radius: 50px;
   border: none;
+  transition: all 0.1s;
 `;
 
 export default Option;

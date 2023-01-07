@@ -53,7 +53,8 @@ const StBtn = styled.button<{ selected: boolean }>`
   height: 130px;
   border-radius: 100%;
   border: none;
-  background-color: ${({ theme, selected }) => (selected ? theme.color.mainBlue : theme.color.lightGray)}; ;
+  background-color: ${({ theme, selected }) => (selected ? theme.color.mainBlue : theme.color.lightGray)};
+  transition: all 0.1s;
 `;
 
 const StLabel = styled.span`
