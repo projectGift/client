@@ -38,6 +38,7 @@ const Slider = ({ options, state, setState }: SliderProp) => {
 
 const StSlider = styled.div`
   position: relative;
+  margin: 20px 0;
   height: 350px;
   overflow: scroll;
   scroll-snap-type: y mandatory;
@@ -54,11 +55,11 @@ const StWrapper = styled.div`
 const StOption = styled.button<{ selected: boolean; currentDiff: number }>`
   padding: 5px 10px;
   margin: 10px;
-  width: 100px;
+  width: 120px;
   height: 50px;
-  background-color: ${({ selected }) => (selected ? '#456F87' : '#f0f0f0')};
-  color: ${({ selected }) => (selected ? 'white' : 'black')};
-  font-weight: 600;
+  background-color: ${({ theme, selected }) => (selected ? theme.color.mainBlue : theme.color.lightGray)};
+  color: ${({ theme, selected }) => (selected ? 'white' : theme.color.blackFont)};
+  font-family: '에스코어드림Bold';
   font-size: 16px;
   border-radius: 50px;
   border: none;

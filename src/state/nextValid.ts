@@ -24,8 +24,8 @@ export const nextValidState = selector({
         return receiver > 0;
       case 1:
         return gender > 0;
-      // case 2:
-      //   return age > 0;
+      case 2:
+        return age > 0;
       // case 3:
       //   return mbti > 0;
       // case 4:
