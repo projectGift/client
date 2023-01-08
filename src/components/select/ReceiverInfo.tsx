@@ -12,10 +12,10 @@ const ReceiverInfo = () => {
         <Headline text="/누구/에게 줄 선물인가요?" />
       </StHeader>
       <StBody>
-        {RECEIVER_INFO.map((who) => (
-          <StBtnWrap key={who.key}>
-            <StBtn selected={receiver === who.key} onClick={() => setReceiver(who.key)} />
-            <StLabel>{who.option}</StLabel>
+        {RECEIVER_INFO.map(({ key, option }) => (
+          <StBtnWrap key={key}>
+            <StBtn selected={receiver === key} onClick={() => setReceiver(key)} />
+            <StLabel>{option}</StLabel>
           </StBtnWrap>
         ))}
       </StBody>

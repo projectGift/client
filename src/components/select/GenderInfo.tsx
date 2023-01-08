@@ -12,8 +12,8 @@ const GenderInfo = () => {
         <Headline text="상대방의 /성별/을 알려주세요." />
       </StHeader>
       <StBody>
-        {GENDER_INFO.map((gen) => (
-          <Option key={gen.key} selected={gender === gen.key} text={gen.option} onClick={() => setGender(gen.key)} />
+        {GENDER_INFO.map(({ key, option }) => (
+          <Option key={key} selected={gender === key} text={option} onClick={() => setGender(key)} />
         ))}
       </StBody>
     </StGenderInfo>
