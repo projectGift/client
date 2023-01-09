@@ -22,8 +22,7 @@ const Slider = ({ options, state, setState }: SliderProp) => {
   return (
     <StSlider ref={sliderRef}>
       <StWrapper>
-        {options.map((el) => {
-          const { key, option } = el;
+        {options.map(({ key, option }) => {
           const currentDiff: number = Math.abs(key - state) <= 2 ? Math.abs(key - state) : 2;
           return (
             <StOption selected={state === key} key={key} onClick={() => handleScroll(key)} currentDiff={currentDiff}>
