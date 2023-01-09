@@ -17,8 +17,8 @@ const PriceInfo = () => {
         <Headline text="/선물의 가격대/는 어느 정도가 좋은가요?" />
       </StHeader>
       <StContents>
-        <PriceOption setPercent={setPercent} />
-        <PriceRange percent={percent} setPercent={setPercent} />
+        <PriceOption />
+        <PriceRange />
         <PriceInput />
       </StContents>
     </StPriceInfo>

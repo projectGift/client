@@ -1,17 +1,12 @@
-import { SetStateAction, Dispatch } from 'react';
 import styled from '@emotion/styled';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { priceState } from '@src/state/price';
+import { percentState } from '@src/state/price';
 
-interface IProps {
-  percent: any;
-  setPercent: Dispatch<SetStateAction<object>>;
-}
-
-const PriceRange = ({ percent, setPercent }: IProps) => {
+const PriceRange = () => {
   const [price, setPrice] = useRecoilState(priceState);
   const { start, end } = price;
-  const { left, right } = percent;
+  const percent = useRecoilValue(percentState);
 
   const priceHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,20 +18,13 @@ const PriceRange = ({ percent, setPercent }: IProps) => {
       setPrice((price: object) => {
         return { ...price, start: end - 1000, end: start + 1000 };
       });
-    } else {
-      setPercent((percent: object) => {
-        return { ...percent, left: (start / 300000) * 100 };
-      });
-      setPercent((percent: object) => {
-        return { ...percent, right: 100 - (end / 300000) * 100 };
-      });
     }
   };
 
   return (
     <StPriceRange>
       <StRangeBar>
-        <StSelectedRangeBar left={left} right={right} />
+        <StSelectedRangeBar percent={percent} />
       </StRangeBar>
       <StRangeBox>
         <StMinRange
@@ -80,11 +68,11 @@ const StRangeBar = styled.div`
   background: ${({ theme }) => theme.color.gray};
 `;
 
-const StSelectedRangeBar = styled.div<{ left: number; right: number }>`
+const StSelectedRangeBar = styled.div<{ percent: Iprice }>`
   position: absolute;
   top: 0px;
-  right: ${(props) => props.right}%;
-  left: ${(props) => props.left}%;
+  right: ${({ percent }) => percent.start}%;
+  left: ${({ percent }) => percent.end}%;
   height: 5px;
   background: ${({ theme }) => theme.color.mainBlue};
 `;
