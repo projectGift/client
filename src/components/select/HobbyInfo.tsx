@@ -24,15 +24,19 @@ const HobbyInfo = () => {
       <StHeader>
         <Headline text="상대방의 /관심사/를 골라주세요." />
       </StHeader>
-      <StBoddy>
-        <StBtnWrap>
-          {HOBBY_INFO.map(({ key, option }) => (
-            <StOption selected={hobby.includes(key)} onClick={() => handleSelect(key)}>
-              {option}
-            </StOption>
-          ))}
-        </StBtnWrap>
-      </StBoddy>
+      <StBody>
+        <StFrameTop />
+        <StFrameBottom />
+        <StContent>
+          <StBtnWrap>
+            {HOBBY_INFO.map(({ key, option }) => (
+              <StOption key={key} selected={hobby.includes(key)} onClick={() => handleSelect(key)}>
+                {option}
+              </StOption>
+            ))}
+          </StBtnWrap>
+        </StContent>
+      </StBody>
     </StHobbyInfo>
   );
 };
@@ -45,11 +49,32 @@ const StHeader = styled.div`
   width: 100%;
 `;
 
-const StBoddy = styled.div`
+const StBody = styled.div`
+  position: relative;
+`;
+
+const StContent = styled.div`
   height: 50vh;
   padding: 30px 0;
   margin: 20px 0;
   overflow-y: scroll;
+`;
+
+const StFrameTop = styled.div`
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+`;
+const StFrameBottom = styled.div`
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
 `;
 
 const StBtnWrap = styled.div`

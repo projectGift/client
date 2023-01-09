@@ -8,6 +8,7 @@ import { priceState } from './price';
 import { relationState } from './relation';
 import { receiverState } from './receiver';
 import { hobbyState } from './hobby';
+import { timeState } from './time';
 
 export const nextValidState = selector({
   key: 'nextValidState',
@@ -21,6 +22,7 @@ export const nextValidState = selector({
     const relation = get(relationState);
     const price = get(priceState);
     const hobby = get(hobbyState);
+    const time = get(timeState);
 
     switch (pageIdx) {
       case 0:
@@ -33,8 +35,10 @@ export const nextValidState = selector({
         return mbti > 0;
       case 4:
         return personality > 0;
-      case 8:
+      case 7:
         return relation > 0;
+      case 8:
+        return time > 0;
       case 9:
         return hobby.length > 0;
       default:
