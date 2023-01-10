@@ -8,6 +8,7 @@ import { priceState } from './price';
 import { relationState } from './relation';
 import { receiverState } from './receiver';
 import { hobbyState } from './hobby';
+import { seasonState } from './season';
 import { timeState } from './time';
 
 export const nextValidState = selector({
@@ -22,6 +23,7 @@ export const nextValidState = selector({
     const relation = get(relationState);
     const price = get(priceState);
     const hobby = get(hobbyState);
+    const season = get(seasonState);
     const time = get(timeState);
 
     switch (pageIdx) {
@@ -41,6 +43,8 @@ export const nextValidState = selector({
         return time > 0;
       case 9:
         return hobby.length > 0;
+      case 10:
+        return season.length > 0;
       default:
         return true;
     }
