@@ -49,7 +49,7 @@ const Select = () => {
   };
 
   const handleClickSubmit = () => {
-    router.push('/result');
+    router.push('/loading');
   };
 
   return (
