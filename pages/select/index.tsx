@@ -14,6 +14,7 @@ import RelationInfo from '@src/components/select/RelationInfo/RelationInfo';
 import TimeInfo from '@src/components/select/TimeInfo';
 import Next from '@src/components/common/Next';
 import HobbyInfo from '@src/components/select/HobbyInfo';
+import SeasonInfo from '@src/components/select/SeasonInfo';
 import EventInfo from '@src/components/select/EventInfo';
 import { pageIdxState } from '@src/state/pageIdx';
 import { useRecoilState } from 'recoil';
@@ -33,6 +34,7 @@ const Select = () => {
     <RelationInfo key={7} />,
     <TimeInfo key={8} />,
     <HobbyInfo key={9} />,
+    <SeasonInfo key={10} />,
     <EventInfo key={11} />,
   ];
 

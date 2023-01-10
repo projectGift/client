@@ -11,14 +11,17 @@ const HobbyInfo = () => {
       return [...hobbys, hobby];
     });
   };
+
   const deselectHobby = (hobby: number) => {
     setHobby((hobbys) => {
       return [...hobbys].filter((key) => key !== hobby);
     });
   };
+
   const handleSelect = (key: number): void => {
     hobby.includes(key) ? deselectHobby(key) : selectHobby(key);
   };
+
   return (
     <StHobbyInfo>
       <StHeader>
