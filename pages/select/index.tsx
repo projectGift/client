@@ -57,21 +57,24 @@ const Select = () => {
   return (
     <>
       <SEO title="질문 선택" />
-      <StSelect>
+      <StSelect isOnboarding={pageIdx === 6}>
         <StHeader>
           <StFlexBox>
             <Image src={BackIcon} alt="back" width={12} height={20} onClick={handleClickPrev} />
           </StFlexBox>
-          <StProgressWrapper>
-            <StAheadProgress width={((pageIdx + 1) / pages.length) * 100 + '%'} />
-            <StProgress width={(pageIdx / pages.length) * 100 + '%'} />
-          </StProgressWrapper>
+          {pageIdx !== 6 && (
+            <StProgressWrapper>
+              <StAheadProgress width={((pageIdx + 1) / pages.length) * 100 + '%'} />
+              <StProgress width={(pageIdx / pages.length) * 100 + '%'} />
+            </StProgressWrapper>
+          )}
         </StHeader>
         <StContents>{pages[pageIdx]}</StContents>
         <StFooter>
           <Next
             onClick={pageIdx + 1 !== pages.length ? handleClickNext : handleClickSubmit}
             isLastPage={pageIdx + 1 === pages.length}
+            isOnboarding={pageIdx === 6}
           />
         </StFooter>
       </StSelect>
@@ -79,10 +82,11 @@ const Select = () => {
   );
 };
 
-const StSelect = styled.div`
+const StSelect = styled.div<{ isOnboarding: boolean }>`
   position: relative;
   width: 100%;
   height: 100vh;
+  background: ${({ theme, isOnboarding }) => (isOnboarding ? theme.color.mainBlue : null)};
 `;
 
 const StHeader = styled.div`
@@ -136,7 +140,6 @@ const StContents = styled.div`
   flex-direction: column;
   padding: 0 20px;
   width: 100%;
-  border: 1px solid black;
 `;
 
 const StFooter = styled.div`
