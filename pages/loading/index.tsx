@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import axios from 'axios';
 import Lottie from 'react-lottie';
@@ -14,16 +14,15 @@ import animationData from '../../public/lotties/64058-playsit-gift-for-quiz.json
 // }
 
 const Loading = ({ data }: any) => {
-  const [isLoading, setisLoading] = useState<boolean>(true);
   const router = useRouter();
 
-  useEffect(() => {
+  const moveToResult = () => {
     setTimeout(() => {
-      setisLoading(false);
+      router.push('/result');
     }, 4000);
-  }, []);
+  };
 
-  if (!isLoading) router.push('/result');
+  useEffect(moveToResult, []);
 
   const defaultOptions = {
     loop: false,
