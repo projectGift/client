@@ -1,9 +1,15 @@
 import styled from '@emotion/styled';
+import { modalState } from '@src/state/modal';
 import React from 'react';
+import { useSetRecoilState } from 'recoil';
 
 const Product = () => {
+  const setModal = useSetRecoilState(modalState);
+  const openIframeModal = () => {
+    setModal('Iframe');
+  };
   return (
-    <StProduct>
+    <StProduct onClick={openIframeModal}>
       <StBadge>1</StBadge>
       <StImgWrap>
         <img src="" alt="" />
@@ -30,6 +36,7 @@ const StProduct = styled.div`
   margin: 25px 0;
   border: 2px solid ${({ theme }) => theme.color.gray};
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const StBadge = styled.div`
