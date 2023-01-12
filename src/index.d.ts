@@ -14,6 +14,16 @@ interface SliderProp {
   setState: SetterOrUpdater<number>;
 }
 
+interface Developers {
+  id: number;
+  position: string;
+  people: {
+    id: number;
+    name: string;
+    insta: string;
+  }[];
+}
+
 interface Color {
   mainBlue: string;
   subBlue: string;
