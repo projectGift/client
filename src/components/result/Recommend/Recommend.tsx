@@ -18,7 +18,7 @@ const Recommend = () => {
       </StHeader>
       <StProductsWrap>
         {arr.map((el, i) => {
-          return <Product />;
+          return <Product key={i} />;
         })}
       </StProductsWrap>
       <StFooter>
