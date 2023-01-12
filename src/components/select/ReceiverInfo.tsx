@@ -2,6 +2,9 @@ import styled from '@emotion/styled';
 import { receiverState } from '@src/state/receiver';
 import { useRecoilState } from 'recoil';
 import Headline from '../common/Headline';
+import 나에게 from 'public/assets/icons/나에게.png';
+import 다른사람에게 from 'public/assets/icons/다른사람에게.png';
+import Image from 'next/image';
 
 const ReceiverInfo = () => {
   const [receiver, setReceiver] = useRecoilState(receiverState);
@@ -12,9 +15,11 @@ const ReceiverInfo = () => {
         <Headline text="/누구/에게 줄 선물인가요?" />
       </StHeader>
       <StBody>
-        {RECEIVER_INFO.map(({ key, option }) => (
+        {RECEIVER_INFO.map(({ key, option, image }) => (
           <StBtnWrap key={key}>
-            <StBtn selected={receiver === key} onClick={() => setReceiver(key)} />
+            <StBtn selected={receiver === key} onClick={() => setReceiver(key)}>
+              <Image src={image} alt={option} height={50} />
+            </StBtn>
             <StLabel>{option}</StLabel>
           </StBtnWrap>
         ))}
@@ -23,9 +28,13 @@ const ReceiverInfo = () => {
   );
 };
 
-const RECEIVER_INFO: IOption[] = [
-  { key: 1, option: '나에게' },
-  { key: 2, option: '다른사람에게' },
+interface Receiver extends IOption {
+  image: StaticImageData;
+}
+
+const RECEIVER_INFO: Receiver[] = [
+  { key: 1, option: '나에게', image: 나에게 },
+  { key: 2, option: '다른사람에게', image: 다른사람에게 },
 ];
 const StRecieverInfo = styled.div`
   width: 100%;
@@ -49,6 +58,9 @@ const StBtnWrap = styled.div`
 `;
 
 const StBtn = styled.button<{ selected: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 130px;
   height: 130px;
   border-radius: 100%;
