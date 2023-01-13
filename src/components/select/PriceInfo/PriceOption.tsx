@@ -1,21 +1,25 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import { useSetRecoilState } from 'recoil';
 import { priceState } from '@src/state/price';
 import Option from '@src/components/common/Option';
 
-const PriceOption = () => {
+interface IProps {
+  selected: string;
+  setSelected: Dispatch<SetStateAction<string>>;
+}
+
+const PriceOption = ({ selected, setSelected }: IProps) => {
   const setPrice = useSetRecoilState(priceState);
-  const [selected, setSelected] = useState<string>('');
 
   const buttonHandler = (option: string) => {
     switch (option) {
       case '소소하게':
-        return setPrice({ start: 0, end: 100000 });
+        return setPrice({ start: 10000, end: 40000 });
       case '적당하게':
-        return setPrice({ start: 100000, end: 200000 });
+        return setPrice({ start: 50000, end: 120000 });
       default:
-        return setPrice({ start: 200000, end: 300000 });
+        return setPrice({ start: 130000, end: 300000 });
     }
   };
 
