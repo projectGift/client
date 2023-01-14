@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import CloseIcon from '../../../../public/assets/icons/icon_close.png';
-import { useResetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from '@src/state/modal';
+import { evaluationToastState } from '@src/state/EvaluationToast';
 
 const IframeModal = () => {
   const closeModal = useResetRecoilState(modalState);
+  const setEvaluationToast = useSetRecoilState(evaluationToastState);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setEvaluationToast(true);
+    }, 4000);
+    return () => {
+      clearTimeout(timer);
+      setEvaluationToast(false);
+    };
+  }, []);
   return (
     <StModal>
       <StModalHeader>
@@ -23,9 +35,9 @@ const IframeModal = () => {
 
 const StModal = styled.div`
   position: absolute;
-  bottom: 0px;
+  top: 0px;
   width: 100%;
-  height: 95vh;
+  height: 100vh;
   border-radius: 5px;
   overflow: hidden;
 `;
@@ -47,7 +59,7 @@ const StIconWrap = styled.div`
 
 const StIframeWrap = styled.div`
   width: 100%;
-  height: 100%;
+  height: 95vh;
   background-color: white;
 `;
 
