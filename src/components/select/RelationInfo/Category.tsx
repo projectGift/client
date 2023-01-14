@@ -81,6 +81,16 @@ const StOptionBox = styled.div`
   background: ${({ theme }) => theme.color.lightGray};
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+
+  @keyframes dropdown {
+    0% {
+      transform: translateY(-30%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+  animation: dropdown 0.2s ease;
 `;
 
 export default Category;
