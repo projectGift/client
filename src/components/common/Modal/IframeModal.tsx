@@ -4,7 +4,7 @@ import Image from 'next/image';
 import CloseIcon from '../../../../public/assets/icons/icon_close.png';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from '@src/state/modal';
-import { evaluationToastState } from '@src/state/EvaluationToast';
+import { evaluationToastState } from '@src/state/evaluationToast';
 
 const IframeModal = () => {
   const closeModal = useResetRecoilState(modalState);

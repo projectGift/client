@@ -6,7 +6,7 @@ import 좋아요 from 'public/assets/icons/좋아요.png';
 import 최고예요 from 'public/assets/icons/최고예요.png';
 import 글쎄요 from 'public/assets/icons/글쎄요.png';
 import { useResetRecoilState } from 'recoil';
-import { evaluationToastState } from '@src/state/EvaluationToast';
+import { evaluationToastState } from '@src/state/evaluationToast';
 import { keyframes } from '@emotion/react';
 
 const EvaluationToast = () => {
