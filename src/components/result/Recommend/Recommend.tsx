@@ -2,14 +2,22 @@ import styled from '@emotion/styled';
 import React from 'react';
 import Product from './Product';
 import Headline from '@src/components/common/Headline';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { relationStringState } from '@src/state/relation';
+import { modalState } from '@src/state/modal';
 
 const arr = new Array(3).fill(0).map((_, i) => {
   return i;
 });
 const Recommend = () => {
   const relation = useRecoilValue(relationStringState);
+
+  const setModal = useSetRecoilState(modalState);
+
+  const openReviewModal = () => {
+    setModal('review');
+  };
+
   return (
     <StRecommend>
       <StHeader>
@@ -22,7 +30,7 @@ const Recommend = () => {
         })}
       </StProductsWrap>
       <StFooter>
-        <StAgain>선물추천 다시 받기</StAgain>
+        <StAgain onClick={openReviewModal}>선물추천 다시 받기</StAgain>
       </StFooter>
     </StRecommend>
   );

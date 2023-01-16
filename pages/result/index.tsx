@@ -12,7 +12,7 @@ const Result = () => {
   const isEvaluationToastPop = useRecoilValue(evaluationToastState);
   const isModalOpen = typeOfModal.length > 0;
   return (
-    <StResult isIframeOpen={typeOfModal === 'Iframe'}>
+    <StResult isIframeOpen={typeOfModal === 'Iframe' || typeOfModal === 'review'}>
       <Recommend />
       {isModalOpen && <Modal />}
       {isEvaluationToastPop && <EvaluationToast />}

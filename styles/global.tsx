@@ -43,7 +43,7 @@ const global = css`
   @font-face {
     font-family: '에스코어드림Bold';
     src: url('/fonts/SCDream6.otf');
-  } ;
+  }
 `;
 
 export default global;

@@ -58,7 +58,7 @@ const StBadge = styled.div`
 const StImgWrap = styled.div`
   width: 100%;
   height: 250px;
-  border-bottom: 2px solid ${({ theme }) => theme.color.gray}; ;
+  border-bottom: 2px solid ${({ theme }) => theme.color.gray};
 `;
 
 const StDescription = styled.div`
