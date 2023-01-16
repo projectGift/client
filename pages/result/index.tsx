@@ -5,7 +5,7 @@ import Modal from '@src/components/common/Modal/Modal';
 import EvaluationToast from '@src/components/common/EvaluationToast';
 import { modalState } from '@src/state/modal';
 import { useRecoilValue } from 'recoil';
-import { evaluationToastState } from '@src/state/EvaluationToast';
+import { evaluationToastState } from '@src/state/evaluationToast';
 
 const Result = () => {
   const typeOfModal = useRecoilValue(modalState);
