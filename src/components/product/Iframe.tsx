@@ -10,8 +10,10 @@ import { currentProductState } from '@src/state/currentProduct';
 const Iframe = () => {
   const router = useRouter();
   const setEvaluationToast = useSetRecoilState(evaluationToastState);
-  const { url } = useRecoilValue(currentProductState);
+  const { url, productId } = useRecoilValue(currentProductState);
   const resetProduct = useResetRecoilState(currentProductState);
+
+  const evaluationRecord = JSON.parse(localStorage.getItem('evaluationRecord') || '[]');
 
   const closeIframe = () => {
     resetProduct();
@@ -20,7 +22,7 @@ const Iframe = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setEvaluationToast(true);
+      if (!evaluationRecord.includes(productId)) setEvaluationToast(true);
     }, 4000);
     return () => {
       clearTimeout(timer);

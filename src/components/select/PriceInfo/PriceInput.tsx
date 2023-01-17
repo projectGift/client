@@ -9,9 +9,9 @@ const PriceInput = () => {
 
   return (
     <StPriceInput>
-      <StPriceBox>{convertPrice(start)} 원</StPriceBox>
+      <StPriceBox>{convertPrice(start.toString())} 원</StPriceBox>
       <StMiddleBox />
-      <StPriceBox>{convertPrice(end)} 원</StPriceBox>
+      <StPriceBox>{convertPrice(end.toString())} 원</StPriceBox>
     </StPriceInput>
   );
 };
