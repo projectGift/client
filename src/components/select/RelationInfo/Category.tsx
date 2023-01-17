@@ -20,19 +20,20 @@ const Category = ({ category, option, open, setOpen, selected, setSelected }: IP
 
   const isValid = selected === category && open;
 
+  const openDropdown = () => {
+    setSelected(category);
+    setOpen(true);
+  };
+
   return (
     <StCategory>
-      <StCategoryBox
-        onClick={() => {
-          setSelected(category);
-          setOpen(true);
-        }}>
+      <StCategoryBox onClick={openDropdown}>
         <StCategoryText>{category}</StCategoryText>
-        <Image className="Image" src={DownIcon} alt="다운아이콘" />
+        <Image src={DownIcon} alt="다운아이콘" width={16.5} height={10} />
       </StCategoryBox>
       {isValid && (
         <StOptionBox>
-          {option.map(({ key, option }: any) => (
+          {option.map(({ key, option }: IOption) => (
             <Option
               key={key}
               option={option}
@@ -63,11 +64,6 @@ const StCategoryBox = styled.div`
   height: 50px;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.color.gray};
-
-  .Image {
-    width: 15px;
-    height: 9px;
-  }
 `;
 
 const StCategoryText = styled.p`
