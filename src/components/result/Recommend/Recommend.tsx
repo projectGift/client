@@ -1,18 +1,27 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import Headline from '@src/components/common/Headline';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { relationStringState } from '@src/state/selected';
 import { modalState } from '@src/state/modal';
+import { useRouter } from 'next/router';
 
 const arr = new Array(3).fill(0).map((_, i) => {
   return i;
 });
 const Recommend = () => {
+  const router = useRouter();
+
+  const [isEvaluated, setisEvaluated] = useState<boolean>(false);
+
   const relation = useRecoilValue(relationStringState);
 
-  const setModal = useSetRecoilState(modalState);
+  const [modal, setModal] = useRecoilState(modalState);
+
+  useEffect(() => {
+    localStorage.getItem('isEvaluated') === 'true' && setisEvaluated(true);
+  }, [modal]);
 
   const openReviewModal = () => {
     setModal('review');
@@ -30,7 +39,12 @@ const Recommend = () => {
         })}
       </StProductsWrap>
       <StFooter>
-        <StAgain onClick={openReviewModal}>선물추천 다시 받기</StAgain>
+        <StAgain
+          onClick={() => {
+            isEvaluated ? router.push('/select') : openReviewModal();
+          }}>
+          선물추천 다시 받기
+        </StAgain>
       </StFooter>
     </StRecommend>
   );
