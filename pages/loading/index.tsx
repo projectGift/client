@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import axios from 'axios';
 import Lottie from 'react-lottie';
-import animationData from '../../public/lotties/64058-playsit-gift-for-quiz.json';
+import animationData from '../../src/lib/lotties/64058-playsit-gift-for-quiz.json';
 
 // 나중에 api 나오면 적용
 // export async function getStaticProps() {

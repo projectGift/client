@@ -60,7 +60,7 @@ const Select = () => {
       <StSelect isOnboarding={pageIdx === 6}>
         <StHeader>
           <StFlexBox>
-            <Image src={BackIcon} alt="back" width={12} height={20} onClick={handleClickPrev} />
+            <Image src={BackIcon} alt="back" width={30} height={24} onClick={handleClickPrev} />
           </StFlexBox>
           {pageIdx !== 6 && (
             <StProgressWrapper>
@@ -97,6 +97,7 @@ const StHeader = styled.div`
 `;
 
 const StProgressWrapper = styled.div`
+  margin-left: 10px;
   margin-right: 30px;
   position: relative;
   width: 100%;
