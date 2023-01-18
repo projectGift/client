@@ -1,10 +1,11 @@
-import { SetStateAction, Dispatch } from 'react';
+import { SetStateAction, Dispatch, useState } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import DownIcon from '../../../../public/assets/icons/icons_down.png';
 import Option from './Option';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { selectedState } from '@src/state/selected';
+import { keyframes } from '@emotion/react';
 
 interface IProps {
   category: string;
@@ -23,22 +24,36 @@ const Category = ({ category, option, open, setOpen, selected, setSelected }: IP
       return { ...selected, relation };
     });
   };
+  const [isOpening, setIsOpening] = useState<boolean>(true);
 
   const isValid = selected === category && open;
 
+  const handleDropdown = () => {
+    selected === category ? closeDropdown() : openDropdown();
+  };
+
   const openDropdown = () => {
+    setIsOpening(true);
     setSelected(category);
     setOpen(true);
   };
 
+  const closeDropdown = () => {
+    setIsOpening(false);
+    setTimeout(() => {
+      setOpen(false);
+      setSelected('');
+    }, 300);
+  };
+
   return (
     <StCategory>
-      <StCategoryBox onClick={openDropdown}>
+      <StCategoryBox onClick={handleDropdown}>
         <StCategoryText>{category}</StCategoryText>
         <Image src={DownIcon} alt="다운아이콘" width={16.5} height={10} />
       </StCategoryBox>
       {isValid && (
-        <StOptionBox>
+        <StOptionBox isOpening={isOpening}>
           {option.map(({ key, option }: IOption) => (
             <Option
               key={key}
@@ -54,6 +69,26 @@ const Category = ({ category, option, open, setOpen, selected, setSelected }: IP
     </StCategory>
   );
 };
+
+const openDropdown = keyframes`
+    0% {
+      max-height: 0;
+      overflow:hidden;
+    }
+    100% {
+      max-height: 100vh;
+    }
+`;
+
+const closeDropdown = keyframes`
+    0% {
+      max-height: 100vh;
+    }
+    100% {
+      max-height: 0;
+      overflow:hidden;
+    }
+  `;
 
 const StCategory = styled.div`
   width: 100%;
@@ -77,22 +112,13 @@ const StCategoryText = styled.p`
   font-size: 16px;
 `;
 
-const StOptionBox = styled.div`
+const StOptionBox = styled.div<{ isOpening: boolean }>`
   padding: 10px;
   width: 100%;
   background: ${({ theme }) => theme.color.lightGray};
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-
-  @keyframes dropdown {
-    0% {
-      transform: translateY(-30%);
-    }
-    100% {
-      transform: translateY(0%);
-    }
-  }
-  animation: dropdown 0.2s ease;
+  animation: ${({ isOpening }) => (isOpening ? openDropdown : closeDropdown)} 0.3s ease;
 `;
 
 export default Category;
