@@ -137,8 +137,9 @@ const StToastWrap = styled.div<{ isMounting: boolean }>`
   display: flex;
   justify-content: center;
   position: absolute;
+  left: 0;
   bottom: 60px;
-  width: 100%;
+  width: 100vw;
   height: 120px;
   animation: ${({ isMounting }) => (isMounting ? mountAnimation : unMountAnimation)} 0.5s ease-in-out;
 `;

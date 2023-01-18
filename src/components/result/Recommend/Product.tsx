@@ -1,15 +1,20 @@
 import styled from '@emotion/styled';
-import { modalState } from '@src/state/modal';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
+import { currentProductState } from '@src/state/currentProduct';
 
-const Product = () => {
-  const setModal = useSetRecoilState(modalState);
-  const openIframeModal = () => {
-    setModal('Iframe');
+const Product = ({ url, productId }: CurrentProduct) => {
+  const router = useRouter();
+  const setCurrentProduct = useSetRecoilState(currentProductState);
+
+  const openIframe = () => {
+    setCurrentProduct({ url, productId });
+    router.push('/product');
   };
+
   return (
-    <StProduct onClick={openIframeModal}>
+    <StProduct onClick={openIframe}>
       <StBadge>1</StBadge>
       <StImgWrap>
         <img src="" alt="" />
