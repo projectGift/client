@@ -2,32 +2,28 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Recommend from '@src/components/result/Recommend/Recommend';
 import Modal from '@src/components/common/Modal/Modal';
-import EvaluationToast from '@src/components/common/EvaluationToast';
 import { modalState } from '@src/state/modal';
 import { useRecoilValue } from 'recoil';
-import { evaluationToastState } from '@src/state/evaluationToast';
 
 const Result = () => {
   const typeOfModal = useRecoilValue(modalState);
-  const isEvaluationToastPop = useRecoilValue(evaluationToastState);
+
   const isModalOpen = typeOfModal.length > 0;
+
   return (
-    <StResult isIframeOpen={typeOfModal === 'Iframe' || typeOfModal === 'review'}>
+    <StResult isReviewOpen={typeOfModal === 'review'}>
       <Recommend />
       {isModalOpen && <Modal />}
-      {isEvaluationToastPop && <EvaluationToast />}
     </StResult>
   );
 };
 
-//Loading -> Recommend 이런식으로..?
-
-const StResult = styled.div<{ isIframeOpen: boolean }>`
+const StResult = styled.div<{ isReviewOpen: boolean }>`
   position: relative;
   width: 100%;
   min-height: 100vh;
-  height: ${({ isIframeOpen }) => (isIframeOpen ? '100vh' : null)};
-  overflow: ${({ isIframeOpen }) => (isIframeOpen ? 'hidden' : null)};
+  height: ${({ isReviewOpen }) => (isReviewOpen ? '100vh' : null)};
+  overflow: ${({ isReviewOpen }) => (isReviewOpen ? 'hidden' : null)};
 `;
 
 export default Result;

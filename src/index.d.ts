@@ -40,3 +40,8 @@ type StaticImageData = {
   width: number;
   blurDataURL?: string;
 };
+
+interface CurrentProduct {
+  productId: number;
+  url: string;
+}

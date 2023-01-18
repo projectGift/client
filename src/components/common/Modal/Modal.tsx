@@ -1,6 +1,5 @@
 import React from 'react';
 import ConfirmModal from './ConfirmModal';
-import IframeModal from './IframeModal';
 import ReviewModal from './ReviewModal/ReviewModal';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
@@ -11,7 +10,6 @@ const Modal = () => {
   const modal: any = {
     confirm: <ConfirmModal />,
     review: <ReviewModal />,
-    Iframe: <IframeModal />,
   };
 
   return <StBackground>{modal[type]}</StBackground>;

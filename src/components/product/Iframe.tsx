@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import CloseIcon from '../../../../public/assets/icons/icon_close.png';
-import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { modalState } from '@src/state/modal';
+import CloseIcon from 'public/assets/icons/icon_close.png';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { evaluationToastState } from '@src/state/evaluationToast';
+import { useRouter } from 'next/router';
+import { currentProductState } from '@src/state/currentProduct';
 
-const IframeModal = () => {
-  const closeModal = useResetRecoilState(modalState);
+const Iframe = () => {
+  const router = useRouter();
   const setEvaluationToast = useSetRecoilState(evaluationToastState);
+  const { url } = useRecoilValue(currentProductState);
+  const resetProduct = useResetRecoilState(currentProductState);
+
+  const closeIframe = () => {
+    resetProduct();
+    router.push('/result');
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,15 +27,16 @@ const IframeModal = () => {
       setEvaluationToast(false);
     };
   }, []);
+
   return (
     <StModal>
       <StModalHeader>
-        <StIconWrap onClick={closeModal}>
+        <StIconWrap onClick={closeIframe}>
           <Image src={CloseIcon} alt="close" width={20} height={20} />
         </StIconWrap>
       </StModalHeader>
       <StIframeWrap>
-        <StIframe src="https://smartstore.naver.com/patori/products/7111777409"></StIframe>
+        <StIframe src={url}></StIframe>
       </StIframeWrap>
     </StModal>
   );
@@ -35,10 +44,10 @@ const IframeModal = () => {
 
 const StModal = styled.div`
   position: absolute;
-  top: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
-  border-radius: 5px;
   overflow: hidden;
 `;
 
@@ -69,4 +78,4 @@ const StIframe = styled.iframe`
   border: none;
 `;
 
-export default IframeModal;
+export default Iframe;

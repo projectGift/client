@@ -26,7 +26,7 @@ const Recommend = () => {
       </StHeader>
       <StProductsWrap>
         {arr.map((el, i) => {
-          return <Product key={i} />;
+          return <Product key={i} url="" productId={i} />;
         })}
       </StProductsWrap>
       <StFooter>
