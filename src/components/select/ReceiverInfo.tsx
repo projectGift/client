@@ -1,14 +1,19 @@
 import styled from '@emotion/styled';
-import { receiverState } from '@src/state/receiver';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import Headline from '../common/Headline';
 import 나에게 from 'public/assets/icons/나에게.png';
 import 다른사람에게 from 'public/assets/icons/다른사람에게.png';
 import Image from 'next/image';
+import { selectedState } from '@src/state/selected';
 
 const ReceiverInfo = () => {
-  const [receiver, setReceiver] = useRecoilState(receiverState);
-
+  const { receiver } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setReceiver = (receiver: number) => {
+    setSelectedState((selected) => {
+      return { ...selected, receiver };
+    });
+  };
   return (
     <StRecieverInfo>
       <StHeader>

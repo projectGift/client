@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
-import { eventState } from '@src/state/event';
-import { useRecoilState } from 'recoil';
+import { selectedState } from '@src/state/selected';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Headline from '../common/Headline';
 import Slider from '../common/Slider';
 
 const EventInfo = () => {
-  const [event, setEvent] = useRecoilState(eventState);
+  const { event } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setEvent = (event: number) => {
+    setSelectedState((selected) => {
+      return { ...selected, event };
+    });
+  };
   return (
     <StEventInfo>
       <StHeader>

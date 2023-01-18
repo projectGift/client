@@ -1,21 +1,24 @@
 import styled from '@emotion/styled';
-import { hobbyState } from '@src/state/hobby';
-import { useRecoilState } from 'recoil';
+import { selectedState } from '@src/state/selected';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import Headline from '../common/Headline';
 
 const HobbyInfo = () => {
-  const [hobby, setHobby] = useRecoilState(hobbyState);
+  const { hobby } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
 
-  const selectHobby = (hobby: number) => {
-    setHobby((hobbys) => {
-      return [...hobbys, hobby];
+  const setHobby = (hobby: number[]) => {
+    setSelectedState((selected) => {
+      return { ...selected, hobby };
     });
   };
 
-  const deselectHobby = (hobby: number) => {
-    setHobby((hobbys) => {
-      return [...hobbys].filter((key) => key !== hobby);
-    });
+  const selectHobby = (key: number) => {
+    setHobby([...hobby, key]);
+  };
+
+  const deselectHobby = (key: number) => {
+    setHobby([...hobby].filter((el) => el !== key));
   };
 
   const handleSelect = (key: number): void => {

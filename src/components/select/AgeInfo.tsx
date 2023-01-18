@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
-import { useRecoilState } from 'recoil';
-import { ageState } from '@src/state/age';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Headline from '../common/Headline';
 import Slider from '../common/Slider';
+import { selectedState } from '@src/state/selected';
 
 const AgeInfo = () => {
-  const [age, setAge] = useRecoilState(ageState);
+  const { age } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setAge = (age: number) => {
+    setSelectedState((selected) => {
+      return { ...selected, age };
+    });
+  };
   return (
     <StAgeInfo>
       <StHeader>

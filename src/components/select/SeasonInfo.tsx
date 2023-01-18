@@ -1,22 +1,25 @@
 import styled from '@emotion/styled';
-import { seasonState } from '@src/state/season';
-import { useRecoilState } from 'recoil';
+
+import { selectedState } from '@src/state/selected';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import Headline from '../common/Headline';
 import Option from '../common/Option';
 
 const SeasonInfo = () => {
-  const [season, setSeason] = useRecoilState(seasonState);
-
-  const selectSeason = (season: number) => {
-    setSeason((seasons) => {
-      return [...seasons, season];
+  const { season } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setSeason = (season: number[]) => {
+    setSelectedState((selected) => {
+      return { ...selected, season };
     });
   };
 
-  const deselectSeason = (season: number) => {
-    setSeason((seasons) => {
-      return [...seasons].filter((key) => key !== season);
-    });
+  const selectSeason = (key: number) => {
+    setSeason([...season, key]);
+  };
+
+  const deselectSeason = (key: number) => {
+    setSeason([...season].filter((el) => el !== key));
   };
 
   const handleSelect = (key: number): void => {

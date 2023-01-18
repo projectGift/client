@@ -3,7 +3,7 @@ import React from 'react';
 import Product from './Product';
 import Headline from '@src/components/common/Headline';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { relationStringState } from '@src/state/relation';
+import { relationStringState } from '@src/state/selected';
 import { modalState } from '@src/state/modal';
 
 const arr = new Array(3).fill(0).map((_, i) => {

@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import { useRecoilState } from 'recoil';
-import { priceState } from '@src/state/price';
+import { useRecoilValue } from 'recoil';
+import { selectedState } from '@src/state/selected';
 import { convertPrice } from '@src/utils/convertPrice';
 
 const PriceInput = () => {
-  const [price, setPrice] = useRecoilState(priceState);
+  const { price } = useRecoilValue(selectedState);
   const { start, end } = price;
 
   return (

@@ -1,8 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { priceState } from '@src/state/price';
-import { percentState } from '@src/state/price';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { percentState, selectedState } from '@src/state/selected';
 
 interface IProps {
   selected: string;
@@ -10,9 +9,16 @@ interface IProps {
 }
 
 const PriceRange = ({ selected, setSelected }: IProps) => {
-  const [price, setPrice] = useRecoilState(priceState);
-  const { start, end } = price;
   const percent = useRecoilValue(percentState);
+  const { price } = useRecoilValue(selectedState);
+  const { start, end } = price;
+  const setSelectedState = useSetRecoilState(selectedState);
+
+  const setPrice = (price: Iprice) => {
+    setSelectedState((selected) => {
+      return { ...selected, price };
+    });
+  };
 
   const priceHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,9 +33,7 @@ const PriceRange = ({ selected, setSelected }: IProps) => {
     }
 
     if (end - start < 1000) {
-      setPrice((price: object) => {
-        return { ...price, start: end - 1000, end: start + 1000 };
-      });
+      setPrice({ start: end - 1000, end: start + 1000 });
     }
   };
 

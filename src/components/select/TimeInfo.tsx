@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
-import { timeState } from '@src/state/time';
-import { useRecoilState } from 'recoil';
+import { selectedState } from '@src/state/selected';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import Headline from '../common/Headline';
 import Slider from '../common/Slider';
 
 const TimeInfo = () => {
-  const [time, setTime] = useRecoilState(timeState);
+  const { time } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setTime = (time: number) => {
+    setSelectedState((selected) => {
+      return { ...selected, time };
+    });
+  };
 
   return (
     <StTimeInfo>
