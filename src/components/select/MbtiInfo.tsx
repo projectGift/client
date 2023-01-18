@@ -1,12 +1,18 @@
 import styled from '@emotion/styled';
-import { mbtiState } from '@src/state/mbti';
-import { useRecoilState } from 'recoil';
+import { selectedState } from '@src/state/selected';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Headline from '../common/Headline';
 import Slider from '../common/Slider';
 
 const MbtiInfo = () => {
-  const [mbti, setMbti] = useRecoilState(mbtiState);
-  console.log(mbti);
+  const { mbti } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setMbti = (mbti: number) => {
+    setSelectedState((selected) => {
+      return { ...selected, mbti };
+    });
+  };
+
   return (
     <StMbtiInfo>
       <StHeader>

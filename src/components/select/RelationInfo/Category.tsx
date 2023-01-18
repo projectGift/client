@@ -1,10 +1,10 @@
-import { SetStateAction, Dispatch, useState } from 'react';
+import { SetStateAction, Dispatch } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import DownIcon from '../../../../public/assets/icons/icons_down.png';
 import Option from './Option';
-import { useRecoilState } from 'recoil';
-import { relationState } from '@src/state/relation';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { selectedState } from '@src/state/selected';
 
 interface IProps {
   category: string;
@@ -16,7 +16,13 @@ interface IProps {
 }
 
 const Category = ({ category, option, open, setOpen, selected, setSelected }: IProps) => {
-  const [relation, setRelation] = useRecoilState<number>(relationState);
+  const { relation } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setRelation = (relation: number) => {
+    setSelectedState((selected) => {
+      return { ...selected, relation };
+    });
+  };
 
   const isValid = selected === category && open;
 

@@ -1,11 +1,18 @@
 import styled from '@emotion/styled';
-import { genderState } from '@src/state/gender';
-import { useRecoilState } from 'recoil';
+import { selectedState } from '@src/state/selected';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import Headline from '../common/Headline';
 import Option from '../common/Option';
 
 const GenderInfo = () => {
-  const [gender, setGender] = useRecoilState(genderState);
+  const { gender } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setGender = (gender: number) => {
+    setSelectedState((selected) => {
+      return { ...selected, gender };
+    });
+  };
+
   return (
     <StGenderInfo>
       <StHeader>

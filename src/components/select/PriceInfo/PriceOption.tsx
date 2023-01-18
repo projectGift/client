@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import { useSetRecoilState } from 'recoil';
-import { priceState } from '@src/state/price';
 import Option from '@src/components/common/Option';
+import { selectedState } from '@src/state/selected';
 
 interface IProps {
   selected: string;
@@ -10,7 +10,12 @@ interface IProps {
 }
 
 const PriceOption = ({ selected, setSelected }: IProps) => {
-  const setPrice = useSetRecoilState(priceState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setPrice = (price: Iprice) => {
+    setSelectedState((selected) => {
+      return { ...selected, price };
+    });
+  };
 
   const buttonHandler = (option: string) => {
     switch (option) {

@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
-import { useRecoilState } from 'recoil';
+import { selectedState } from '@src/state/selected';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Headline from '../common/Headline';
 import Option from '../common/Option';
-import { personalityState } from '@src/state/presonality';
 
 const PersonalityInfo = () => {
-  const [personality, setPersonality] = useRecoilState(personalityState);
+  const { personality } = useRecoilValue(selectedState);
+  const setSelectedState = useSetRecoilState(selectedState);
+  const setPersonality = (personality: number) => {
+    setSelectedState((selected) => {
+      return { ...selected, personality };
+    });
+  };
 
   return (
     <StPersinalityInfo>

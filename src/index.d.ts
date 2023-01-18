@@ -11,7 +11,7 @@ interface IOption {
 interface SliderProp {
   options: IOption[];
   state: number;
-  setState: SetterOrUpdater<number>;
+  setState: (number) => void;
 }
 
 interface Developers {
@@ -44,4 +44,18 @@ type StaticImageData = {
 interface CurrentProduct {
   productId: number;
   url: string;
+}
+
+interface Selected {
+  receiver: number;
+  gender: number;
+  age: number;
+  mbti: number;
+  personality: number;
+  price: Iprice;
+  relation: number;
+  time: number;
+  hobby: number[];
+  season: number[];
+  event: number;
 }
