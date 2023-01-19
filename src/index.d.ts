@@ -24,6 +24,12 @@ interface Developers {
   }[];
 }
 
+interface Survey {
+  recommend: number;
+  improvements: number[];
+  comment: string;
+}
+
 interface Color {
   mainBlue: string;
   subBlue: string;

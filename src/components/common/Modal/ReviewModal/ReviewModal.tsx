@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import Image from 'next/image';
-import styled from '@emotion/styled';
+import { useMutation } from 'react-query';
 import { useResetRecoilState } from 'recoil';
 import { modalState } from '@src/state/modal';
-import Organization from './Organization';
+import Image from 'next/image';
+import styled from '@emotion/styled';
+import reviewAPI from '@src/api/review';
 import Review from './Review';
+import Organization from './Organization';
 import SubmitIcon from '/public/assets/icons/icons_submit.png';
 import ActiveSubmitIcon from '/public/assets/icons/icons_activeSubmit.png';
 
@@ -13,30 +15,36 @@ const ReviewModal = () => {
 
   const [isReview, setisReview] = useState<boolean>(true);
 
-  const [options, setOptions] = useState<number[]>([]);
+  const [survey, setSurvey] = useState<Survey>({
+    recommend: 0,
+    improvements: [],
+    comment: '',
+  });
 
-  const [comment, setComment] = useState<string>('');
+  const { recommend, improvements, comment } = survey;
 
-  const canSubmit = options.length > 0 && comment.length > 0;
+  const canSubmit = recommend !== 0 && improvements.length > 0 && comment.length > 0;
+
+  const surveyInfo = {
+    questionnaireId: [...improvements, recommend],
+    comment: comment,
+  };
 
   const pageHandler = () => {
     return isReview ? setisReview(false) : setisReview(true);
   };
 
+  const { mutate: postReviewMutate } = useMutation((data: any) => reviewAPI.postReview(data), {
+    onSuccess: () => {
+      localStorage.setItem('isEvaluated', 'true');
+      closeModal();
+    },
+  });
+
   return (
     <StReviewModal>
       <StBody isReview={isReview}>
-        {isReview ? (
-          <Review
-            options={options}
-            setOptions={setOptions}
-            comment={comment}
-            setComment={setComment}
-            pageHandler={pageHandler}
-          />
-        ) : (
-          <Organization />
-        )}
+        {isReview ? <Review survey={survey} setSurvey={setSurvey} pageHandler={pageHandler} /> : <Organization />}
       </StBody>
       <StFooter>
         <Image
@@ -45,7 +53,7 @@ const ReviewModal = () => {
           width={65}
           height={65}
           onClick={() => {
-            canSubmit && isReview ? closeModal() : pageHandler();
+            canSubmit && isReview ? postReviewMutate(surveyInfo) : pageHandler();
           }}
         />
       </StFooter>
