@@ -7,14 +7,12 @@ import { relationStringState, selectedState } from '@src/state/selected';
 import { modalState } from '@src/state/modal';
 import { useRouter } from 'next/router';
 import { pageIdxState } from '@src/state/pageIdx';
+import { recommendResultState } from '@src/state/recommendResult';
 
-const arr = new Array(3).fill(0).map((_, i) => {
-  return i;
-});
 const Recommend = () => {
   const router = useRouter();
 
-  const [isEvaluated, setisEvaluated] = useState<boolean>(false);
+  const [isEvaluated, setIsEvaluated] = useState<boolean>(false);
 
   const resetPageIdx = useResetRecoilState(pageIdxState);
 
@@ -25,8 +23,9 @@ const Recommend = () => {
   const [modal, setModal] = useRecoilState(modalState);
 
   useEffect(() => {
-    localStorage.getItem('isEvaluated') === 'true' && setisEvaluated(true);
+    localStorage.getItem('isEvaluated') === 'true' && setIsEvaluated(true);
   }, [modal]);
+  const recommendResult = useRecoilValue(recommendResultState);
 
   const openReviewModal = () => {
     setModal('review');
@@ -45,8 +44,8 @@ const Recommend = () => {
         이런 선물 3가지를 추천하고싶어요!
       </StHeader>
       <StProductsWrap>
-        {arr.map((el, i) => {
-          return <Product key={i} url="" productId={i} />;
+        {recommendResult.map((product, index) => {
+          return <Product key={product.id} index={index} product={product} />;
         })}
       </StProductsWrap>
       <StFooter>

@@ -1,3 +1,5 @@
-export const convertPrice = (price: number) => {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export const convertPrice = (price: string) => {
+  return parseInt(price)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
