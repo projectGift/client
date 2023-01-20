@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import { useResetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { modalState } from '@src/state/modal';
 import Image from 'next/image';
 import styled from '@emotion/styled';
@@ -11,7 +11,7 @@ import SubmitIcon from '/public/assets/icons/icons_submit.png';
 import ActiveSubmitIcon from '/public/assets/icons/icons_activeSubmit.png';
 
 const ReviewModal = () => {
-  const closeModal = useResetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
 
   const [isReview, setisReview] = useState<boolean>(true);
 
@@ -37,7 +37,7 @@ const ReviewModal = () => {
   const { mutate: postReviewMutate } = useMutation((data: any) => reviewAPI.postReview(data), {
     onSuccess: () => {
       localStorage.setItem('isEvaluated', 'true');
-      closeModal();
+      setModal('confirm');
     },
   });
 

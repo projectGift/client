@@ -18,7 +18,7 @@ const Loading = ({ data }: any) => {
 
   const moveToResult = () => {
     setTimeout(() => {
-      router.push('/result');
+      router.replace('/result');
     }, 4000);
   };
 
