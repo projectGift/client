@@ -1,19 +1,21 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
-import axios from 'axios';
 import Lottie from 'react-lottie';
 import animationData from '../../src/lib/lotties/64058-playsit-gift-for-quiz.json';
+import loadingAPI from '@src/api/loading';
 
-// 나중에 api 나오면 적용
-// export async function getStaticProps() {
-//   const res = await axios('https://dummyjson.com/todos/1');
-//   const data = await res.data;
+export async function getStaticProps() {
+  const response = await loadingAPI.getProductCount();
 
-//   return { props: { data } };
-// }
+  return {
+    props: {
+      counts: response,
+    },
+  };
+}
 
-const Loading = ({ data }: any) => {
+const Loading = ({ counts }: any) => {
   const router = useRouter();
 
   const moveToResult = () => {
@@ -40,7 +42,7 @@ const Loading = ({ data }: any) => {
         <Lottie options={defaultOptions} height={400} width={400} />
       </StContents>
       <StFooter>
-        당신에게 추천하고 싶은 <br /> 000번째 선물을 살펴보는중...
+        당신에게 추천하고 싶은 <br /> {counts}번째 선물을 살펴보는중...
       </StFooter>
     </StLoading>
   );
