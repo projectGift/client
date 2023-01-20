@@ -102,19 +102,19 @@ const IMPROVEMENT_OPTION: IOption[] = [
   { key: 2, option: '추천받은 선물이 더 맘에 들었으면' },
   { key: 3, option: '선물을 추천한 이유나 설명이 있었으면' },
   { key: 4, option: '질문지가 더 구체적이었으면 (분위기 등)' },
-  { key: 5, option: '질문지가 더 적었으면 (현재 11개)' },
-  { key: 6, option: '글씨가 더 커졌으면' },
-  { key: 7, option: '느리거나 답답한 느낌을 줄였으면' },
-  { key: 8, option: '앱 디자인이 더 귀여웠으면' },
-  { key: 9, option: '앱 디자인이 더 고급스러웠으면' },
-  { key: 10, option: '앱에서 선물을 바로 구매할 수 있으면' },
-  { key: 11, option: '기타 (아래에 적어주세요)' },
+  { key: 13, option: '질문지가 더 적었으면 (현재 11개)' },
+  { key: 14, option: '글씨가 더 커졌으면' },
+  { key: 5, option: '느리거나 답답한 느낌을 줄였으면' },
+  { key: 6, option: '앱 디자인이 더 귀여웠으면' },
+  { key: 7, option: '앱 디자인이 더 고급스러웠으면' },
+  { key: 8, option: '앱에서 선물을 바로 구매할 수 있으면' },
+  { key: 9, option: '기타 (아래에 적어주세요)' },
 ];
 
 const RECOMMEND_OPTION: IOption[] = [
-  { key: 12, option: '별로' },
-  { key: 13, option: '재미삼아' },
-  { key: 14, option: '매우 추천' },
+  { key: 10, option: '별로' },
+  { key: 11, option: '재미삼아' },
+  { key: 12, option: '매우 추천' },
 ];
 
 const StReview = styled.div`
