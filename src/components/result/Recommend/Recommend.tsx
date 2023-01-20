@@ -8,6 +8,7 @@ import { modalState } from '@src/state/modal';
 import { useRouter } from 'next/router';
 import { pageIdxState } from '@src/state/pageIdx';
 import { recommendResultState } from '@src/state/recommendResult';
+import LocalStorage from '@src/utils/LocalStorage';
 
 const Recommend = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const Recommend = () => {
   const [modal, setModal] = useRecoilState(modalState);
 
   useEffect(() => {
-    localStorage.getItem('isEvaluated') === 'true' && setIsEvaluated(true);
+    LocalStorage.getItem('isEvaluated') === 'true' && setIsEvaluated(true);
   }, [modal]);
   const recommendResult = useRecoilValue(recommendResultState);
 
