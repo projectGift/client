@@ -17,11 +17,23 @@ import HobbyInfo from '@src/components/select/HobbyInfo';
 import SeasonInfo from '@src/components/select/SeasonInfo';
 import EventInfo from '@src/components/select/EventInfo';
 import { pageIdxState } from '@src/state/pageIdx';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { selectedState } from '@src/state/selected';
+import { useMutation } from 'react-query';
+import suggestAPI from '@src/api/suggest';
+import { recommendResultState } from '@src/state/recommendResult';
 
 const Select = () => {
   const router = useRouter();
   const [pageIdx, setPageIdx] = useRecoilState(pageIdxState);
+  const selected = useRecoilValue(selectedState);
+  const setResult = useSetRecoilState(recommendResultState);
+
+  const { mutate: suggest } = useMutation((selected: Selected) => suggestAPI.postSelected(selected), {
+    onSuccess: (data: any) => {
+      setResult(data);
+    },
+  });
 
   const pages = [
     <ReceiverInfo key={0} />,
@@ -51,6 +63,7 @@ const Select = () => {
   };
 
   const handleClickSubmit = () => {
+    suggest(selected);
     router.push('/loading');
   };
 
