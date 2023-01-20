@@ -12,6 +12,7 @@ import client from '@src/api/client';
 import { currentProductState } from '@src/state/currentProduct';
 import { useMutation } from 'react-query';
 import evaluateAPI from '@src/api/evaluate';
+import LocalStorage from '@src/utils/LocalStorage';
 
 const EvaluationToast = () => {
   const [touched, setTouched] = useState<number>(0);
@@ -43,8 +44,8 @@ const EvaluationToast = () => {
     (evaluation: Evaluation) => evaluateAPI.postEvaluation(evaluation),
     {
       onSuccess: () => {
-        const evaluationRecord = JSON.parse(localStorage.getItem('evaluationRecord') || '[]');
-        localStorage.setItem('evaluationRecord', JSON.stringify([...evaluationRecord, productId]));
+        const evaluationRecord = JSON.parse(LocalStorage.getItem('evaluationRecord') || '[]');
+        LocalStorage.setItem('evaluationRecord', JSON.stringify([...evaluationRecord, productId]));
       },
     },
   );

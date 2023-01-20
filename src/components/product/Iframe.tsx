@@ -6,6 +6,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { evaluationToastState } from '@src/state/evaluationToast';
 import { useRouter } from 'next/router';
 import { currentProductState } from '@src/state/currentProduct';
+import LocalStorage from '@src/utils/LocalStorage';
 
 const Iframe = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const Iframe = () => {
   const { url, productId } = useRecoilValue(currentProductState);
   const resetProduct = useResetRecoilState(currentProductState);
 
-  const evaluationRecord = JSON.parse(localStorage.getItem('evaluationRecord') || '[]');
+  const evaluationRecord = JSON.parse(LocalStorage.getItem('evaluationRecord') || '[]');
 
   const closeIframe = () => {
     resetProduct();

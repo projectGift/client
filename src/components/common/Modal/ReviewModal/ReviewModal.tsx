@@ -9,6 +9,7 @@ import Review from './Review';
 import Organization from './Organization';
 import SubmitIcon from '/public/assets/icons/icons_submit.png';
 import ActiveSubmitIcon from '/public/assets/icons/icons_activeSubmit.png';
+import LocalStorage from '@src/utils/LocalStorage';
 
 const ReviewModal = () => {
   const setModal = useSetRecoilState(modalState);
@@ -36,7 +37,7 @@ const ReviewModal = () => {
 
   const { mutate: postReviewMutate } = useMutation((data: any) => reviewAPI.postReview(data), {
     onSuccess: () => {
-      localStorage.setItem('isEvaluated', 'true');
+      LocalStorage.setItem('isEvaluated', 'true');
       setModal('confirm');
     },
   });
