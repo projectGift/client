@@ -24,7 +24,7 @@ const ReviewModal = () => {
 
   const { recommend, improvements, comment } = survey;
 
-  const canSubmit = recommend !== 0 && improvements.length > 0 && comment.length > 0;
+  const canSubmit = recommend !== 0 && improvements.length > 0;
 
   const surveyInfo = {
     questionnaireId: [...improvements, recommend],
