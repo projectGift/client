@@ -21,6 +21,8 @@ const Recommend = () => {
 
   const relation = useRecoilValue(relationStringState);
 
+  const { receiver } = useRecoilValue(selectedState);
+
   const [modal, setModal] = useRecoilState(modalState);
 
   useEffect(() => {
@@ -38,10 +40,12 @@ const Recommend = () => {
     router.push('/select');
   };
 
+  const headLine = `${receiver === 1 ? '/당신/에게' : '당신의 /' + relation + '/에게'}`;
+
   return (
     <StRecommend>
       <StHeader>
-        <Headline text={`당신의 /${relation}/에게`} />
+        <Headline text={headLine} />
         이런 선물 3가지를 추천하고싶어요!
       </StHeader>
       <StProductsWrap>

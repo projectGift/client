@@ -1,22 +1,39 @@
 import styled from '@emotion/styled';
 import { selectedState } from '@src/state/selected';
+import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Headline from '../common/Headline';
 import Slider from '../common/Slider';
 
 const MbtiInfo = () => {
-  const { mbti } = useRecoilValue(selectedState);
+  const { mbti, receiver } = useRecoilValue(selectedState);
   const setSelectedState = useSetRecoilState(selectedState);
   const setMbti = (mbti: number) => {
     setSelectedState((selected) => {
       return { ...selected, mbti };
     });
   };
+  const headLine = `${receiver === 1 ? '당신' : '상대방'}의 /MBTI/를 알고 있나요?`;
+
+  useEffect(() => {
+    if (2 <= mbti && mbti <= 9)
+      setSelectedState((selected) => {
+        return { ...selected, personality: 2 };
+      });
+    else if (10 <= mbti && mbti <= 17)
+      setSelectedState((selected) => {
+        return { ...selected, personality: 1 };
+      });
+    else if (mbti === 1)
+      setSelectedState((selected) => {
+        return { ...selected, personality: 0 };
+      });
+  }, [mbti]);
 
   return (
     <StMbtiInfo>
       <StHeader>
-        <Headline text="상대방의 /MBTI/를 알고 있나요?" />
+        <Headline text={headLine} />
       </StHeader>
       <Slider options={MBTI_INFO} state={mbti} setState={setMbti} />
     </StMbtiInfo>

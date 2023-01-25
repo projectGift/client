@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { nextValidState } from '@src/state/selected';
+import { nextValidState } from '@src/state/nextValid';
 import { useRecoilValue } from 'recoil';
 
 interface Props {

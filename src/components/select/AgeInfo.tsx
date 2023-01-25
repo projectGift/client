@@ -5,17 +5,18 @@ import Slider from '../common/Slider';
 import { selectedState } from '@src/state/selected';
 
 const AgeInfo = () => {
-  const { age } = useRecoilValue(selectedState);
+  const { age, receiver } = useRecoilValue(selectedState);
   const setSelectedState = useSetRecoilState(selectedState);
   const setAge = (age: number) => {
     setSelectedState((selected) => {
       return { ...selected, age };
     });
   };
+  const headLine = `${receiver === 1 ? '당신' : '상대방'}의 /나이/는 어떻게 되나요?"`;
   return (
     <StAgeInfo>
       <StHeader>
-        <Headline text="상대방의 /나이/는 어떻게 되나요?" />
+        <Headline text={headLine} />
       </StHeader>
       <Slider options={AGE_INFO} state={age} setState={setAge} />
     </StAgeInfo>

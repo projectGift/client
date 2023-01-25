@@ -22,12 +22,16 @@ import { selectedState } from '@src/state/selected';
 import { useMutation } from 'react-query';
 import suggestAPI from '@src/api/suggest';
 import { recommendResultState } from '@src/state/recommendResult';
+import { currentPageState } from '@src/state/currentPage';
+import { useEffect, useState } from 'react';
 
 const Select = () => {
   const router = useRouter();
   const [pageIdx, setPageIdx] = useRecoilState(pageIdxState);
+  const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
   const selected = useRecoilValue(selectedState);
   const setResult = useSetRecoilState(recommendResultState);
+  const { receiver, mbti } = selected;
 
   const { mutate: suggest } = useMutation((selected: Selected) => suggestAPI.postSelected(selected), {
     onSuccess: (data: any) => {
@@ -35,20 +39,51 @@ const Select = () => {
     },
   });
 
-  const pages = [
-    <ReceiverInfo key={0} />,
-    <GenderInfo key={1} />,
-    <AgeInfo key={2} />,
-    <MbtiInfo key={3} />,
-    <PersonalityInfo key={4} />,
-    <PriceInfo key={5} />,
-    <Onboarding key={6} />,
-    <RelationInfo key={7} />,
-    <TimeInfo key={8} />,
-    <HobbyInfo key={9} />,
-    <SeasonInfo key={10} />,
-    <EventInfo key={11} />,
-  ];
+  const pages: { [key: string]: JSX.Element } = {
+    receiverInfo: <ReceiverInfo key={0} />,
+    genderInfo: <GenderInfo key={1} />,
+    ageInfo: <AgeInfo key={2} />,
+    mbtiInfo: <MbtiInfo key={3} />,
+    personalityInfo: <PersonalityInfo key={4} />,
+    priceInfo: <PriceInfo key={5} />,
+    onboarding: <Onboarding key={6} />,
+    relationInfo: <RelationInfo key={7} />,
+    timeInfo: <TimeInfo key={8} />,
+    hobbyInfo: <HobbyInfo key={9} />,
+    seasonInfo: <SeasonInfo key={10} />,
+    eventInfo: <EventInfo key={11} />,
+  };
+
+  const toMeOrTheOthers: { [key: number]: string[] } = {
+    1: [
+      'receiverInfo',
+      'genderInfo',
+      'ageInfo',
+      'mbtiInfo',
+      'personalityInfo',
+      'priceInfo',
+      'onboarding',
+      'hobbyInfo',
+      'seasonInfo',
+      'eventInfo',
+    ],
+    2: [
+      'receiverInfo',
+      'genderInfo',
+      'ageInfo',
+      'mbtiInfo',
+      'personalityInfo',
+      'priceInfo',
+      'onboarding',
+      'relationInfo',
+      'timeInfo',
+      'hobbyInfo',
+      'seasonInfo',
+      'eventInfo',
+    ],
+  };
+
+  const [selectedPages, setSelectedPages] = useState<string[]>(toMeOrTheOthers[2]);
 
   const handleClickPrev = () => {
     if (pageIdx === 0) {
@@ -67,27 +102,43 @@ const Select = () => {
     router.push('/loading');
   };
 
+  useEffect(() => {
+    setSelectedPages(toMeOrTheOthers[receiver]);
+  }, [receiver]);
+
+  useEffect(() => {
+    setCurrentPage(selectedPages[pageIdx]);
+  }, [pageIdx]);
+
+  useEffect(() => {
+    if (mbti > 1)
+      setSelectedPages((pages) => {
+        return [...pages].filter((page) => page !== 'personalityInfo');
+      });
+    else if (mbti === 1) setSelectedPages(toMeOrTheOthers[receiver]);
+  }, [mbti]);
+
   return (
     <>
       <SEO title="질문 선택" />
-      <StSelect isOnboarding={pageIdx === 6}>
+      <StSelect isOnboarding={currentPage === 'onboarding'}>
         <StHeader>
           <StFlexBox>
             <Image src={BackIcon} alt="back" width={30} height={24} onClick={handleClickPrev} />
           </StFlexBox>
-          {pageIdx !== 6 && (
+          {currentPage !== 'onboarding' && (
             <StProgressWrapper>
-              <StAheadProgress width={((pageIdx + 1) / pages.length) * 100 + '%'} />
-              <StProgress width={(pageIdx / pages.length) * 100 + '%'} />
+              <StAheadProgress width={((pageIdx + 1) / selectedPages?.length) * 100 + '%'} />
+              <StProgress width={(pageIdx / selectedPages?.length) * 100 + '%'} />
             </StProgressWrapper>
           )}
         </StHeader>
-        <StContents>{pages[pageIdx]}</StContents>
+        <StContents>{pages[currentPage]}</StContents>
         <StFooter>
           <Next
-            onClick={pageIdx + 1 !== pages.length ? handleClickNext : handleClickSubmit}
-            isLastPage={pageIdx + 1 === pages.length}
-            isOnboarding={pageIdx === 6}
+            onClick={pageIdx + 1 !== selectedPages?.length ? handleClickNext : handleClickSubmit}
+            isLastPage={pageIdx + 1 === selectedPages?.length}
+            isOnboarding={currentPage === 'onboarding'}
           />
         </StFooter>
       </StSelect>
