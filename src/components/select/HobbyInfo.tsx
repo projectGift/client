@@ -4,7 +4,7 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import Headline from '../common/Headline';
 
 const HobbyInfo = () => {
-  const { hobby } = useRecoilValue(selectedState);
+  const { hobby, receiver } = useRecoilValue(selectedState);
   const setSelectedState = useSetRecoilState(selectedState);
 
   const setHobby = (hobby: number[]) => {
@@ -25,10 +25,12 @@ const HobbyInfo = () => {
     hobby.includes(key) ? deselectHobby(key) : selectHobby(key);
   };
 
+  const headLine = `${receiver === 1 ? '당신' : '상대방'}의 /관심사/를 골라주세요.`;
+
   return (
     <StHobbyInfo>
       <StHeader>
-        <Headline text="상대방의 /관심사/를 골라주세요." />
+        <Headline text={headLine} />
       </StHeader>
       <StBody>
         <StFrameTop />

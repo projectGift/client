@@ -5,7 +5,7 @@ import Headline from '../common/Headline';
 import Option from '../common/Option';
 
 const GenderInfo = () => {
-  const { gender } = useRecoilValue(selectedState);
+  const { gender, receiver } = useRecoilValue(selectedState);
   const setSelectedState = useSetRecoilState(selectedState);
   const setGender = (gender: number) => {
     setSelectedState((selected) => {
@@ -13,10 +13,12 @@ const GenderInfo = () => {
     });
   };
 
+  const headLine = `${receiver === 1 ? '당신' : '상대방'}의 /성별/을 알려주세요.`;
+
   return (
     <StGenderInfo>
       <StHeader>
-        <Headline text="상대방의 /성별/을 알려주세요." />
+        <Headline text={headLine} />
       </StHeader>
       <StBody>
         {GENDER_INFO.map(({ key, option }) => (
@@ -45,6 +47,6 @@ const StBody = styled.div`
 const GENDER_INFO: IOption[] = [
   { key: 1, option: '남자' },
   { key: 2, option: '여자' },
-  { key: 3, option: '무응답' },
+  { key: 3, option: '둘다' },
 ];
 export default GenderInfo;

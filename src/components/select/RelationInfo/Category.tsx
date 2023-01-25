@@ -17,7 +17,7 @@ interface IProps {
 }
 
 const Category = ({ category, option, open, setOpen, selected, setSelected }: IProps) => {
-  const { relation } = useRecoilValue(selectedState);
+  const { relation, gender } = useRecoilValue(selectedState);
   const setSelectedState = useSetRecoilState(selectedState);
   const setRelation = (relation: number) => {
     setSelectedState((selected) => {
@@ -46,6 +46,12 @@ const Category = ({ category, option, open, setOpen, selected, setSelected }: IP
     }, 300);
   };
 
+  const optionFilter = (option: number): boolean => {
+    if (gender === 1) return !(option === 2);
+    if (gender === 2) return !(option === 1);
+    return option === gender;
+  };
+
   return (
     <StCategory>
       <StCategoryBox onClick={handleDropdown}>
@@ -54,16 +60,18 @@ const Category = ({ category, option, open, setOpen, selected, setSelected }: IP
       </StCategoryBox>
       {isValid && (
         <StOptionBox isOpening={isOpening}>
-          {option.map(({ key, option }: IOption) => (
-            <Option
-              key={key}
-              option={option}
-              isSelected={key === relation}
-              onClick={() => {
-                setRelation(key);
-              }}
-            />
-          ))}
+          {option
+            .filter((option: any) => optionFilter(option.gender))
+            .map(({ key, option }: IOption) => (
+              <Option
+                key={key}
+                option={option}
+                isSelected={key === relation}
+                onClick={() => {
+                  setRelation(key);
+                }}
+              />
+            ))}
         </StOptionBox>
       )}
     </StCategory>
