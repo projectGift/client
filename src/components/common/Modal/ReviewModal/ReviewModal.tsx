@@ -54,7 +54,7 @@ const ReviewModal = () => {
           width={65}
           height={65}
           onClick={() => {
-            canSubmit && isReview ? postReviewMutate(surveyInfo) : pageHandler();
+            canSubmit && isReview ? postReviewMutate(surveyInfo) : !isReview && pageHandler();
           }}
         />
       </StFooter>

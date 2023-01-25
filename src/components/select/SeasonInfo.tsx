@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-
 import { selectedState } from '@src/state/selected';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import Headline from '../common/Headline';
@@ -19,13 +18,13 @@ const SeasonInfo = () => {
   };
 
   const deselectSeason = (key: number) => {
-    setSeason([...season].filter((el) => el !== key));
+    setSeason(season.filter((el) => el !== key));
   };
 
   const handleSelect = (key: number): void => {
     if (key === 5 && !season.includes(key)) return setSeason([key]);
 
-    if (season.includes(5) && season.length > 0) deselectSeason(5);
+    if (season.includes(5) && key !== 5) return setSeason([key]);
 
     season.includes(key) ? deselectSeason(key) : selectSeason(key);
   };
