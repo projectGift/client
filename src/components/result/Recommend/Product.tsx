@@ -3,10 +3,18 @@ import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { currentProductState } from '@src/state/currentProduct';
+import { convertPrice } from '@src/utils/convertPrice';
 
-const Product = ({ url, productId }: CurrentProduct) => {
+interface IProps {
+  index: number;
+  product: RecommendResult;
+}
+
+const Product = ({ product, index }: IProps) => {
   const router = useRouter();
   const setCurrentProduct = useSetRecoilState(currentProductState);
+
+  const { id: productId, product_url: url, product_name, product_price, product_review_count, thumbnail } = product;
 
   const openIframe = () => {
     setCurrentProduct({ url, productId });
@@ -15,18 +23,20 @@ const Product = ({ url, productId }: CurrentProduct) => {
 
   return (
     <StProduct onClick={openIframe}>
-      <StBadge>1</StBadge>
+      <StBadgeWrap>
+        <StBadge index={index}>{index + 1}</StBadge>
+      </StBadgeWrap>
       <StImgWrap>
-        <img src="" alt="" />
+        <StImg src={thumbnail} alt={product_name} />
       </StImgWrap>
       <StDescription>
-        <StName>가나다라마바사아자차카타파하아야어여오요우유으이</StName>
+        <StName>{product_name}</StName>
         <StDetail>
           <span>
-            리뷰 <StReview>500</StReview>
+            리뷰 <StReview>{product_review_count}</StReview>
           </span>
           <span>
-            <StPrice>150,000</StPrice> 원
+            <StPrice>{convertPrice(product_price)}</StPrice> 원
           </span>
         </StDetail>
       </StDescription>
@@ -44,10 +54,20 @@ const StProduct = styled.div`
   cursor: pointer;
 `;
 
-const StBadge = styled.div`
+const StBadgeWrap = styled.div`
   position: absolute;
   top: -25px;
   left: -25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: white;
+`;
+
+const StBadge = styled.div<{ index: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,12 +78,19 @@ const StBadge = styled.div`
   color: white;
   font-family: '에스코어드림Bold';
   font-size: 20px;
+  opacity: ${({ index }) => 1 - index / 5};
 `;
 
 const StImgWrap = styled.div`
   width: 100%;
   height: 250px;
   border-bottom: 2px solid ${({ theme }) => theme.color.gray};
+`;
+
+const StImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 `;
 
 const StDescription = styled.div`

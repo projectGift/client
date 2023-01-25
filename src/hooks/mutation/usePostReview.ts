@@ -8,7 +8,7 @@ import { useResetRecoilState } from 'recoil';
 const usePostReview = () => {
   const closeModal = useResetRecoilState(modalState);
 
-  return useMutation((data: IReview) => reviewAPI.postReview(data), {
+  return useMutation((data: Review) => reviewAPI.postReview(data), {
     onSuccess: (data: AxiosResponse) => {
       console.log(data);
       closeModal();

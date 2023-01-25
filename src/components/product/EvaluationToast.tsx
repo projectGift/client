@@ -5,53 +5,75 @@ import 별로예요 from 'public/assets/icons/별로예요.png';
 import 좋아요 from 'public/assets/icons/좋아요.png';
 import 최고예요 from 'public/assets/icons/최고예요.png';
 import 글쎄요 from 'public/assets/icons/글쎄요.png';
-import { useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { evaluationToastState } from '@src/state/evaluationToast';
 import { keyframes } from '@emotion/react';
+import client from '@src/api/client';
+import { currentProductState } from '@src/state/currentProduct';
+import { useMutation } from 'react-query';
+import evaluateAPI from '@src/api/evaluate';
+import LocalStorage from '@src/utils/LocalStorage';
 
 const EvaluationToast = () => {
-  const [touched, setTouched] = useState<string>('');
-  const [evaluation, setEvaluation] = useState<string>('');
+  const [touched, setTouched] = useState<number>(0);
+  const [evaluation, setEvaluation] = useState<number>(0);
   const [isMounting, setIsMounting] = useState<boolean>(true);
   const closeToast = useResetRecoilState(evaluationToastState);
+  const { productId } = useRecoilValue(currentProductState);
 
   const evaluate = (e: React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
-    const { alt } = e.target as HTMLImageElement;
-    setEvaluation(alt);
+    const { dataset } = e.target as HTMLImageElement;
+    if (dataset.rating) setEvaluation(+dataset.rating);
   };
 
   const touchStartIcon = (e: React.TouchEvent<HTMLImageElement>) => {
     e.stopPropagation();
-    const { alt } = e.target as HTMLImageElement;
-    setTouched(alt);
+    const { dataset } = e.target as HTMLImageElement;
+    if (dataset.rating) setTouched(+dataset.rating);
   };
 
   const touchEndIcon = (e: React.TouchEvent<HTMLImageElement>) => {
     e.stopPropagation();
-    const { alt } = e.target as HTMLImageElement;
-    setTouched('');
-    setEvaluation(alt);
+    const { dataset } = e.target as HTMLImageElement;
+    setTouched(0);
+    if (dataset.rating) setEvaluation(+dataset.rating);
+  };
+
+  const { mutate: postEvaluationMutate } = useMutation(
+    (evaluation: Evaluation) => evaluateAPI.postEvaluation(evaluation),
+    {
+      onSuccess: () => {
+        const evaluationRecord = JSON.parse(LocalStorage.getItem('evaluationRecord') || '[]');
+        LocalStorage.setItem('evaluationRecord', JSON.stringify([...evaluationRecord, productId]));
+      },
+    },
+  );
+
+  const postEvaluation = () => {
+    postEvaluationMutate({ productId, ratingId: evaluation });
   };
 
   useEffect(() => {
-    if (evaluation.length !== 0) {
+    if (evaluation !== 0) {
       setTimeout(() => setIsMounting(false), 2000);
       setTimeout(closeToast, 2500);
+      postEvaluation();
     }
   }, [evaluation]);
 
   return (
     <StToastWrap isMounting={isMounting}>
       <StToast>
-        {evaluation.length === 0 ? (
+        {evaluation === 0 ? (
           <>
             <StHeader>지금 보고 계신 선물에 대해 평가해주세요.</StHeader>
             <StBody>
-              <StIconWrap touched={touched === '별로예요'}>
+              <StIconWrap touched={touched === 1}>
                 <Image
                   src={별로예요}
                   alt="별로예요"
+                  data-rating="1"
                   height={42}
                   width={42}
                   onTouchStart={touchStartIcon}
@@ -60,10 +82,11 @@ const EvaluationToast = () => {
                   priority={true}
                 />
               </StIconWrap>
-              <StIconWrap touched={touched === '글쎄요'}>
+              <StIconWrap touched={touched === 2}>
                 <Image
                   src={글쎄요}
                   alt="글쎄요"
+                  data-rating="2"
                   height={47}
                   width={42}
                   onTouchStart={touchStartIcon}
@@ -72,10 +95,11 @@ const EvaluationToast = () => {
                   priority={true}
                 />
               </StIconWrap>
-              <StIconWrap touched={touched === '좋아요'}>
+              <StIconWrap touched={touched === 3}>
                 <Image
                   src={좋아요}
                   alt="좋아요"
+                  data-rating="3"
                   height={42}
                   width={42}
                   onTouchStart={touchStartIcon}
@@ -84,10 +108,11 @@ const EvaluationToast = () => {
                   priority={true}
                 />
               </StIconWrap>
-              <StIconWrap touched={touched === '최고예요'}>
+              <StIconWrap touched={touched === 4}>
                 <Image
                   src={최고예요}
                   alt="최고예요"
+                  data-rating="1"
                   height={42}
                   width={42}
                   onTouchStart={touchStartIcon}

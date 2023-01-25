@@ -65,3 +65,22 @@ interface Selected {
   season: number[];
   event: number;
 }
+
+interface RecommendResult {
+  id: number;
+  product_name: string;
+  product_price: string;
+  product_review_count: number;
+  product_url: string;
+  thumbnail: string;
+}
+
+interface Evaluation {
+  productId: number;
+  ratingId: number;
+}
+
+interface Review {
+  questionnairedId: number[];
+  comment: string;
+}

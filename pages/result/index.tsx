@@ -11,19 +11,19 @@ const Result = () => {
   const isModalOpen = typeOfModal.length > 0;
 
   return (
-    <StResult isReviewOpen={typeOfModal === 'review'}>
+    <StResult isModalOpen={isModalOpen}>
       <Recommend />
       {isModalOpen && <Modal />}
     </StResult>
   );
 };
 
-const StResult = styled.div<{ isReviewOpen: boolean }>`
+const StResult = styled.div<{ isModalOpen: boolean }>`
   position: relative;
   width: 100%;
   min-height: 100vh;
-  height: ${({ isReviewOpen }) => (isReviewOpen ? '100vh' : null)};
-  overflow: ${({ isReviewOpen }) => (isReviewOpen ? 'hidden' : null)};
+  height: ${({ isModalOpen }) => (isModalOpen ? '100vh' : null)};
+  overflow: ${({ isModalOpen }) => (isModalOpen ? 'hidden' : null)};
 `;
 
 export default Result;

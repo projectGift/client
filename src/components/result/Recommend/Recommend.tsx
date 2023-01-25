@@ -2,46 +2,61 @@ import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import Headline from '@src/components/common/Headline';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { relationStringState } from '@src/state/selected';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { relationStringState, selectedState } from '@src/state/selected';
 import { modalState } from '@src/state/modal';
 import { useRouter } from 'next/router';
+import { pageIdxState } from '@src/state/pageIdx';
+import { recommendResultState } from '@src/state/recommendResult';
+import LocalStorage from '@src/utils/LocalStorage';
 
-const arr = new Array(3).fill(0).map((_, i) => {
-  return i;
-});
 const Recommend = () => {
   const router = useRouter();
 
-  const [isEvaluated, setisEvaluated] = useState<boolean>(false);
+  const [isEvaluated, setIsEvaluated] = useState<boolean>(false);
+
+  const resetPageIdx = useResetRecoilState(pageIdxState);
+
+  const resetSelected = useResetRecoilState(selectedState);
 
   const relation = useRecoilValue(relationStringState);
+
+  const { receiver } = useRecoilValue(selectedState);
 
   const [modal, setModal] = useRecoilState(modalState);
 
   useEffect(() => {
-    localStorage.getItem('isEvaluated') === 'true' && setisEvaluated(true);
+    LocalStorage.getItem('isEvaluated') === 'true' && setIsEvaluated(true);
   }, [modal]);
+  const recommendResult = useRecoilValue(recommendResultState);
 
   const openReviewModal = () => {
     setModal('review');
   };
 
+  const recommendAgain = () => {
+    resetPageIdx();
+    resetSelected();
+    router.push('/select');
+  };
+
+  const headLine = `${receiver === 1 ? '/당신/에게' : '당신의 /' + relation + '/에게'}`;
+
   return (
     <StRecommend>
       <StHeader>
-        <Headline text={`당신의 /${relation}/에게`} />
+        <Headline text={headLine} />
         이런 선물 3가지를 추천하고싶어요!
       </StHeader>
       <StProductsWrap>
-        {arr.map((el, i) => {
-          return <Product key={i} url="" productId={i} />;
+        {recommendResult.map((product, index) => {
+          return <Product key={product.id} index={index} product={product} />;
         })}
       </StProductsWrap>
       <StFooter>
         <StAgain
           onClick={() => {
-            isEvaluated ? router.push('/select') : openReviewModal();
+            isEvaluated ? recommendAgain() : openReviewModal();
           }}>
           선물추천 다시 받기
         </StAgain>

@@ -7,7 +7,7 @@ const client = axios.create({ baseURL });
 client.interceptors.response.use((res: AxiosResponse) => {
   console.log(res);
   try {
-    if (res.status === 200) {
+    if (res.status === 200 || res.status === 201) {
       return res.data;
     } else {
       return [res.data.error, res.data.message];

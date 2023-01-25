@@ -26,37 +26,6 @@ export const percentState = selector({
   },
 });
 
-export const nextValidState = selector({
-  key: 'nextValidState',
-  get: ({ get }) => {
-    const { receiver, gender, age, mbti, personality, relation, time, hobby, season } = get(selectedState);
-    const pageIdx = get(pageIdxState);
-
-    switch (pageIdx) {
-      case 0:
-        return receiver > 0;
-      case 1:
-        return gender > 0;
-      case 2:
-        return age > 0;
-      case 3:
-        return mbti > 0;
-      case 4:
-        return personality > 0;
-      case 7:
-        return relation > 0;
-      case 8:
-        return time > 0;
-      case 9:
-        return hobby.length > 0;
-      case 10:
-        return season.length > 0;
-      default:
-        return true;
-    }
-  },
-});
-
 const RELATION_STRING = [
   '남자친구',
   '여자친구',

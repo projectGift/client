@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import { useResetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { modalState } from '@src/state/modal';
 import Image from 'next/image';
 import styled from '@emotion/styled';
@@ -9,9 +9,10 @@ import Review from './Review';
 import Organization from './Organization';
 import SubmitIcon from '/public/assets/icons/icons_submit.png';
 import ActiveSubmitIcon from '/public/assets/icons/icons_activeSubmit.png';
+import LocalStorage from '@src/utils/LocalStorage';
 
 const ReviewModal = () => {
-  const closeModal = useResetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
 
   const [isReview, setisReview] = useState<boolean>(true);
 
@@ -23,7 +24,7 @@ const ReviewModal = () => {
 
   const { recommend, improvements, comment } = survey;
 
-  const canSubmit = recommend !== 0 && improvements.length > 0 && comment.length > 0;
+  const canSubmit = recommend !== 0 && improvements.length > 0;
 
   const surveyInfo = {
     questionnaireId: [...improvements, recommend],
@@ -36,8 +37,8 @@ const ReviewModal = () => {
 
   const { mutate: postReviewMutate } = useMutation((data: any) => reviewAPI.postReview(data), {
     onSuccess: () => {
-      localStorage.setItem('isEvaluated', 'true');
-      closeModal();
+      LocalStorage.setItem('isEvaluated', 'true');
+      setModal('confirm');
     },
   });
 
@@ -53,7 +54,7 @@ const ReviewModal = () => {
           width={65}
           height={65}
           onClick={() => {
-            canSubmit && isReview ? postReviewMutate(surveyInfo) : pageHandler();
+            canSubmit && isReview ? postReviewMutate(surveyInfo) : !isReview && pageHandler();
           }}
         />
       </StFooter>
