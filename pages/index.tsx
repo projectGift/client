@@ -2,6 +2,8 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import SEO from '@src/components/common/SEO';
+import MainBg from 'public/assets/images/image_mainBg.png';
+import { keyframes } from '@emotion/react';
 
 const Home = () => {
   const router = useRouter();
@@ -10,7 +12,16 @@ const Home = () => {
     <>
       <SEO title="@@" />
       <StHome>
-        {/* <StHeader>로고</StHeader> */}
+        <StBackground img={MainBg.src} />
+        <StHeader>
+          <StTitle>
+            HOW
+            <br />
+            ABOUT
+            <br />
+            THIS ONE?
+          </StTitle>
+        </StHeader>
         <StFooter>
           <StWithoutLoginBtn
             onClick={() => {
@@ -35,19 +46,49 @@ const SOCIAL_LOGIN_TYPE = [
   { id: 2, type: '애플' },
 ];
 
+const backgroundAnimation = keyframes`
+0% {
+  left: 0;
+}
+100% {
+  left: -2481px;
+}
+`;
+
 const StHome = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
   background-color: ${({ theme }) => theme.color.mainBlue};
+  overflow: hidden;
 `;
 
-const StHeader = styled.h1`
+const StBackground = styled.div<{ img: string }>`
   position: absolute;
-  top: 30%;
+  width: 2911px;
+  height: 1200px;
+  background-image: url(${({ img }) => img});
+  background-size: cover;
+  animation: ${backgroundAnimation} 30s linear infinite running;
+`;
+
+const StHeader = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  bottom: 23%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
+`;
+
+const StTitle = styled.h1`
+  text-align: left;
+  font-family: '에스코어드림ExtraBold';
+  font-size: 55px;
+  color: white;
+  cursor: default;
 `;
 
 const StFooter = styled.div`
