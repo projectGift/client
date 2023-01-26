@@ -44,6 +44,10 @@ const global = css`
     font-family: '에스코어드림Bold';
     src: url('/fonts/SCDream6.otf');
   }
+  @font-face {
+    font-family: '에스코어드림ExtraBold';
+    src: url('/fonts/SCDream7.otf');
+  }
 `;
 
 export default global;

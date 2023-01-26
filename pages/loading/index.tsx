@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import loadingAPI from '@src/api/loading';
 import Image from 'next/image';
-import GiftImg from '../../public/assets/images/image_giftBox.png';
-import LoadingBg from '../../public/assets/images/image_loadingBg.png';
+import GiftImg from 'public/assets/images/image_giftBox.png';
+import LoadingBg from 'public/assets/images/image_loadingBg.png';
 
 export async function getStaticProps() {
   const response = await loadingAPI.getProductCount();
