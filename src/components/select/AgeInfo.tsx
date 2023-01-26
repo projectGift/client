@@ -12,7 +12,7 @@ const AgeInfo = () => {
       return { ...selected, age };
     });
   };
-  const headLine = `${receiver === 1 ? '당신' : '상대방'}의 /나이/는 어떻게 되나요?"`;
+  const headLine = `${receiver === 1 ? '당신' : '상대방'}의 /나이/는 어떻게 되나요?`;
   return (
     <StAgeInfo>
       <StHeader>
