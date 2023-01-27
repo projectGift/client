@@ -69,7 +69,7 @@ const StBackground = styled.div<{ img: string }>`
   height: 1200px;
   background-image: url(${({ img }) => img});
   background-size: cover;
-  animation: ${backgroundAnimation} 30s linear infinite running;
+  animation: ${backgroundAnimation} 48s linear infinite running;
 `;
 
 const StHeader = styled.div`
