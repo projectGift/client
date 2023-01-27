@@ -19,6 +19,7 @@ jobs:
           port: ${{ secrets.AWS_PORT }}
           script: |
             cd client
+            git checkout dev
             git pull origin dev
             yarn install
             yarn build
