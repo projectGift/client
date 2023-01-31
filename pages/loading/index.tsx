@@ -2,9 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import loadingAPI from '@src/api/loading';
-import Image from 'next/image';
-import GiftImg from 'public/assets/images/image_giftBox.png';
-import LoadingBg from 'public/assets/images/image_loadingBg.png';
+import Lottie from 'react-lottie';
+import animationData from '../../src/lib/lotties/64058-playsit-gift-for-quiz.json';
 
 export async function getStaticProps() {
   const response = await loadingAPI.getProductCount();
@@ -22,16 +21,25 @@ const Loading = ({ counts }: any) => {
   const moveToResult = () => {
     setTimeout(() => {
       router.push('/result');
-    }, 2000);
+    }, 4000);
   };
 
   useEffect(moveToResult, []);
 
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
   return (
-    <StLoading LoadingBg={LoadingBg}>
+    <StLoading>
       <StHeader>모든 질문이 끝났어요!</StHeader>
       <StContents>
-        <Image src={GiftImg} alt="선물이미지" width={300} height={270} />
+        <Lottie options={defaultOptions} height={400} width={400} />
       </StContents>
       <StFooter>
         당신에게 추천하고 싶은 <br /> {counts}번째 선물을 살펴보는중...
@@ -40,7 +48,7 @@ const Loading = ({ counts }: any) => {
   );
 };
 
-const StLoading = styled.div<{ LoadingBg: any }>`
+const StLoading = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
@@ -48,10 +56,7 @@ const StLoading = styled.div<{ LoadingBg: any }>`
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  background-image: url(${(props) => props.LoadingBg.src});
-  background-size: cover;
-  background-repeat: no-repeat;
-  overflow: hidden;
+  background: ${({ theme }) => theme.color.mainBlue};
 `;
 
 const StHeader = styled.p`
@@ -62,20 +67,14 @@ const StHeader = styled.p`
 `;
 
 const StContents = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 58%;
-  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 45vh;
-  /* border: 1px solid black; */
 `;
 
 const StFooter = styled(StHeader)`
-  margin-top: 300px;
   line-height: 35px;
 `;
 
