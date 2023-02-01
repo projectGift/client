@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import loadingAPI from '@src/api/loading';
+import LoadingBg from 'public/assets/images/image_loadingBg.png';
 import Lottie from 'react-lottie';
 import animationData from '../../src/lib/lotties/64058-playsit-gift-for-quiz.json';
 
@@ -36,7 +37,7 @@ const Loading = ({ counts }: any) => {
   };
 
   return (
-    <StLoading>
+    <StLoading LoadingBg={LoadingBg}>
       <StHeader>모든 질문이 끝났어요!</StHeader>
       <StContents>
         <Lottie options={defaultOptions} height={400} width={400} />
@@ -48,7 +49,7 @@ const Loading = ({ counts }: any) => {
   );
 };
 
-const StLoading = styled.div`
+const StLoading = styled.div<{ LoadingBg: any }>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -56,7 +57,7 @@ const StLoading = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  background: ${({ theme }) => theme.color.mainBlue};
+  background-image: url(${({ LoadingBg }) => LoadingBg.src});
 `;
 
 const StHeader = styled.p`
