@@ -10,7 +10,7 @@ const Home = () => {
 
   return (
     <>
-      <SEO title="@@" />
+      <SEO title="홈" />
       <StHome>
         <StBackground img={MainBg.src} />
         <StHeader>

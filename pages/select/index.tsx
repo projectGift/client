@@ -120,7 +120,7 @@ const Select = () => {
 
   return (
     <>
-      <SEO title="질문 선택" />
+      <SEO title="질문선택" />
       <StSelect isOnboarding={currentPage === 'onboarding'}>
         <StHeader>
           <StFlexBox>

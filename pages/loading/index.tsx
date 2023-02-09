@@ -5,6 +5,7 @@ import loadingAPI from '@src/api/loading';
 import LoadingBg from 'public/assets/images/image_loadingBg.png';
 import Lottie from 'react-lottie';
 import animationData from '../../src/lib/lotties/64058-playsit-gift-for-quiz.json';
+import SEO from '@src/components/common/SEO';
 
 export async function getStaticProps() {
   const response = await loadingAPI.getProductCount();
@@ -37,15 +38,18 @@ const Loading = ({ counts }: any) => {
   };
 
   return (
-    <StLoading LoadingBg={LoadingBg}>
-      <StHeader>모든 질문이 끝났어요!</StHeader>
-      <StContents>
-        <Lottie options={defaultOptions} height={400} width={400} />
-      </StContents>
-      <StFooter>
-        당신에게 추천하고 싶은 <br /> {counts}번째 선물을 살펴보는중...
-      </StFooter>
-    </StLoading>
+    <>
+      <SEO title="로딩" />
+      <StLoading LoadingBg={LoadingBg}>
+        <StHeader>모든 질문이 끝났어요!</StHeader>
+        <StContents>
+          <Lottie options={defaultOptions} height={400} width={400} />
+        </StContents>
+        <StFooter>
+          당신에게 추천하고 싶은 <br /> {counts}번째 선물을 살펴보는중...
+        </StFooter>
+      </StLoading>
+    </>
   );
 };
 
