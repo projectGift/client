@@ -74,6 +74,7 @@ const StReviewModal = styled.div`
   width: 90%;
   background: white;
   border-radius: 10px;
+  z-index: 100;
 `;
 
 const StBody = styled.div<{ isReview: boolean }>`
