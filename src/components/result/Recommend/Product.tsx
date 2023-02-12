@@ -4,6 +4,8 @@ import { useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { currentProductState } from '@src/state/currentProduct';
 import { convertPrice } from '@src/utils/convertPrice';
+import DefaultImg from '/public/assets/images/image_default.png';
+import Image from 'next/image';
 
 interface IProps {
   index: number;
@@ -27,7 +29,11 @@ const Product = ({ product, index }: IProps) => {
         <StBadge index={index}>{index + 1}</StBadge>
       </StBadgeWrap>
       <StImgWrap>
-        <StImg src={thumbnail} alt={product_name} />
+        {thumbnail ? (
+          <StImg src={thumbnail} alt={product_name} />
+        ) : (
+          <StDefault src={DefaultImg} alt={product_name} fill />
+        )}
       </StImgWrap>
       <StDescription>
         <StName>{product_name}</StName>
@@ -79,18 +85,24 @@ const StBadge = styled.div<{ index: number }>`
   font-family: '에스코어드림Bold';
   font-size: 20px;
   opacity: ${({ index }) => 1 - index / 5};
+  z-index: 10;
 `;
 
 const StImgWrap = styled.div`
+  position: relative;
   width: 100%;
   height: 250px;
   border-bottom: 2px solid ${({ theme }) => theme.color.gray};
+  z-index: -10;
 `;
 
 const StImg = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: fill;
+`;
+
+const StDefault = styled(Image)`
+  width: 100%;
 `;
 
 const StDescription = styled.div`
