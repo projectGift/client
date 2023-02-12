@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  images: {
+    domains: ['ca.slack-edge.com'],
+  },
   async rewrites() {
     return [
       {
