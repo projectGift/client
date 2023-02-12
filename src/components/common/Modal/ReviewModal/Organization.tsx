@@ -1,9 +1,14 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import 좋아요 from 'public/assets/icons/좋아요.png';
-import InstaIcon from 'public/assets/icons/icons_insta.png';
+import TojiImg from '../../../../../public/assets/images/image_toji.png';
+import InstaIcon from '/public/assets/icons/icons_insta.png';
+import GithubIcon from '/public/assets/icons/icons_github.png';
 
 const Organization = () => {
+  const handleOpenNewTab = (url: string) => {
+    window.open(url, '_blank', 'noopener, noreferrer');
+  };
+
   return (
     <StOrganization>
       <StHeader>GIFT PROJECT</StHeader>
@@ -13,12 +18,21 @@ const Organization = () => {
             <StComposition key={id}>
               <StPosition>{position}</StPosition>
               <StDeveloperBox>
-                {people.map(({ id, name, insta }) => (
-                  <StDeveloper key={id}>
-                    <Image src={좋아요} alt="인원사진" width={60} height={60} />
+                {people.map(({ id, name, imgUrl, contact }) => (
+                  <StDeveloper
+                    key={id}
+                    onClick={() => {
+                      handleOpenNewTab(contact);
+                    }}>
+                    <StProfileImg src={name === '송보현' ? TojiImg : imgUrl} alt="인원사진" width={120} height={120} />
                     <StInformation>
                       <StNickname>{name}</StNickname>
-                      <Image src={InstaIcon} alt="인스타 아이콘" width={16} height={16} />
+                      <Image
+                        src={name === '송보현' ? InstaIcon : GithubIcon}
+                        alt="인스타 아이콘"
+                        width={16}
+                        height={16}
+                      />
                     </StInformation>
                   </StDeveloper>
                 ))}
@@ -40,22 +54,49 @@ const DEVELOPERS: Developers[] = [
     id: 0,
     position: 'Frontend Developer',
     people: [
-      { id: 0, name: '김솔', insta: 'www.naver.com' },
-      { id: 1, name: '이진혁', insta: 'www.naver.com' },
+      {
+        id: 0,
+        name: '김솔',
+        contact: 'https://github.com/Solrasido55',
+        imgUrl: 'https://ca.slack-edge.com/TH0U6FBTN-U03RARH33QF-05b8fcf210c7-512',
+      },
+      {
+        id: 1,
+        name: '이진혁',
+        contact: 'https://github.com/zinukk',
+        imgUrl: 'https://ca.slack-edge.com/TH0U6FBTN-U03S42BBL3B-bc1666f79a7e-512',
+      },
     ],
   },
   {
     id: 1,
     position: 'Backend Developer',
     people: [
-      { id: 0, name: '김택수', insta: 'www.naver.com' },
-      { id: 1, name: '박은송', insta: 'www.naver.com' },
+      {
+        id: 0,
+        name: '김택수',
+        contact: 'https://github.com/robinkim93',
+        imgUrl: 'https://ca.slack-edge.com/TH0U6FBTN-U03S42CF1R7-6e5bd2eab91b-512',
+      },
+      {
+        id: 1,
+        name: '박은송',
+        contact: 'https://github.com/smileeunsong',
+        imgUrl: 'https://ca.slack-edge.com/TH0U6FBTN-U03RRCTCQAW-6081adc61c7c-512',
+      },
     ],
   },
   {
     id: 2,
     position: 'Project manager / Designer',
-    people: [{ id: 0, name: '송보현', insta: 'www.naver.com' }],
+    people: [
+      {
+        id: 0,
+        name: '송보현',
+        contact: 'https://www.instagram.com/toji_god',
+        imgUrl: 'https://ca.slack-edge.com/TH0U6FBTN-U03S42CF1R7-6e5bd2eab91b-512',
+      },
+    ],
   },
 ];
 
@@ -103,6 +144,11 @@ const StDeveloper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
+  cursor: pointer;
+`;
+
+const StProfileImg = styled(Image)`
+  border-radius: 50%;
 `;
 
 const StInformation = styled.div`

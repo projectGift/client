@@ -20,7 +20,8 @@ interface Developers {
   people: {
     id: number;
     name: string;
-    insta: string;
+    contact: string;
+    imgUrl: string;
   }[];
 }
 
