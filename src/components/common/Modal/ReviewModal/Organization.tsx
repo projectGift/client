@@ -24,7 +24,14 @@ const Organization = () => {
                     onClick={() => {
                       handleOpenNewTab(contact);
                     }}>
-                    <StProfileImg src={name === '송보현' ? TojiImg : imgUrl} alt="인원사진" width={120} height={120} />
+                    <StImgWrapper>
+                      <StProfileImg
+                        src={name === '송보현' ? TojiImg : imgUrl}
+                        alt="인원사진"
+                        width={120}
+                        height={120}
+                      />
+                    </StImgWrapper>
                     <StInformation>
                       <StNickname>{name}</StNickname>
                       <Image
@@ -93,7 +100,7 @@ const DEVELOPERS: Developers[] = [
       {
         id: 0,
         name: '송보현',
-        contact: 'https://www.instagram.com/toji_god',
+        contact: 'https://instagram.com/look_at_meng?igshid=YmMyMTA2M2Y=',
         imgUrl: 'https://ca.slack-edge.com/TH0U6FBTN-U03S42CF1R7-6e5bd2eab91b-512',
       },
     ],
@@ -145,6 +152,13 @@ const StDeveloper = styled.div`
   flex-direction: column;
   width: 100%;
   cursor: pointer;
+`;
+
+const StImgWrapper = styled.div`
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.color.gray};
 `;
 
 const StProfileImg = styled(Image)`
