@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { currentProductState } from '@src/state/currentProduct';
@@ -15,6 +15,7 @@ interface IProps {
 const Product = ({ product, index }: IProps) => {
   const router = useRouter();
   const setCurrentProduct = useSetRecoilState(currentProductState);
+  const [isError, setisError] = useState<boolean>(false);
 
   const { id: productId, product_url: url, product_name, product_price, product_review_count, thumbnail } = product;
 
@@ -30,7 +31,13 @@ const Product = ({ product, index }: IProps) => {
       </StBadgeWrap>
       <StImgWrap>
         {thumbnail ? (
-          <StImg src={thumbnail} alt={product_name} />
+          <StImg
+            onError={() => {
+              setisError(true);
+            }}
+            src={isError ? DefaultImg.src : thumbnail}
+            alt={product_name}
+          />
         ) : (
           <StDefault src={DefaultImg} alt={product_name} fill />
         )}
