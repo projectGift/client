@@ -7,7 +7,7 @@ import Lottie from 'react-lottie';
 import animationData from '../../src/lib/lotties/64058-playsit-gift-for-quiz.json';
 import SEO from '@src/components/common/SEO';
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const response = await loadingAPI.getProductCount();
 
   return {
